@@ -1,0 +1,6 @@
+# pnpm-workspace.yaml
+packages:
+  - "apps/*" # For your React and NestJS applications
+  - "packages/*" # For shared libraries/components
+
+injectWorkspacePackages: true

@@ -1,0 +1,23 @@
+export type CompanyEvaluationResponse = {
+  annualRevenue: string;
+  developerSalaries: string;
+  otherDirectCost: string;
+  grossProfit: string;
+  operatingExpenses: string;
+  ebidta: string;
+  ebidtaPercentage: string;
+  tax: string;
+  netProfit: string;
+  profitMarginPercentage: string;
+  mrr: string;
+  clientConcentration: string;
+  valuation: string;
+  pMultiple: string;
+  fteCorrection?: string;
+  rcrCorrection: string;
+  pFinal: string;
+  rMultiple: string;
+  rFteCorrection?: string;
+  rRcrCorrection: string;
+  rFinal: string;
+};

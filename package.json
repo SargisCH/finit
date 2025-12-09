@@ -1,0 +1,14 @@
+{
+  "scripts": {
+    "apps:dev": " concurrently \"pnpm --filter server start:dev\" \"pnpm --filter client dev\"",
+    "cleandep": "rm -rf node_modules && rm -rf node_modules && rm -rf apps/client/node_modules && rm -rf apps/server/node_modules && rm -rf packages/schemas/node_modules",
+    "deploy:server": "bash scripts/deploy.sh"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "@shared/schemas": "workspace:*",
+    "server": "workspace:*"
+  }
+}
