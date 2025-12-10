@@ -1,15 +1,16 @@
-import { Box, Button, Flex, Menu, Portal, Image } from "@chakra-ui/react";
+import { Box, Flex, Menu, Portal, Image } from "@chakra-ui/react";
 import usFlag from "../assets/united-states-svgrepo-com.svg";
 import armFlag from "../assets/armenia-svgrepo-com.svg";
 import { useTranslation } from "react-i18next";
-import { FC } from "react";
 
 const icons = {
   en: usFlag,
   am: armFlag,
 };
 
-const MainLayout: FC = ({ children }) => {
+type Props = {};
+
+const MainLayout: React.FC<React.PropsWithChildren<Props>> = ({ children }) => {
   const { i18n } = useTranslation();
   const selectedLanguage = (i18n.resolvedLanguage ??
     "en") as keyof typeof icons;

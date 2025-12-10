@@ -1,6 +1,6 @@
 import { Box, Button, Dialog, Flex } from "@chakra-ui/react";
 import { CompanyEvaluationResponse } from "@shared/schemas";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { currencyFormat } from "../../utils";
 
 type Props = {

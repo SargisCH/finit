@@ -22,12 +22,7 @@ import {
 import DialogCustom from "./components/ui/dialog";
 import { ColorModeButton } from "./components/ui/color-mode";
 import { Trans, useTranslation } from "react-i18next";
-
-const FORMAT_OPTIONS: Intl.NumberFormatOptions = {
-  style: "currency",
-  currency: "AMD",
-  currencyDisplay: "code",
-};
+import CurrencyInput from "./components/ui/currencyInput";
 
 const getLevelOptions = (t: (key: string) => string) => {
   return [
@@ -38,7 +33,7 @@ const getLevelOptions = (t: (key: string) => string) => {
 };
 
 function App() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const initialData = localStorage.getItem("data");
   const {
@@ -75,6 +70,7 @@ function App() {
   const { open, onOpen, onClose } = useDisclosure();
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState<any>();
+  const lng = i18n.language;
 
   const onSubmit: SubmitHandler<CompanyEvaluateDto> = (data) => {
     setLoading(true);
@@ -96,11 +92,16 @@ function App() {
       })
       .finally(() => setLoading(false));
   };
-  const { collection, filter } = useListCollection({
-    initialItems: getLevelOptions(t),
-  });
-
   const { contains } = useFilter({ sensitivity: "base" });
+  const { collection, filter, set } = useListCollection({
+    initialItems: getLevelOptions(t),
+    filter: contains,
+  });
+  useEffect(() => {
+    const newItems = getLevelOptions(t);
+    set(newItems);
+  }, [set, lng]);
+
   const handleInputChange = (details: Combobox.InputValueChangeDetails) => {
     filter(details.inputValue);
   };
@@ -180,286 +181,120 @@ function App() {
             <Trans i18nKey="revenueInputs" />
           </Box>
           <Flex gap={6} justifyContent={"start"}>
-            <Field.Root invalid={!!errors.monthlyRevenue}>
-              <Field.Label>
-                <Trans i18nKey="monthlyRevenue" />
-              </Field.Label>
-              <Field.HelperText>
-                <Trans i18nKey={"monthlyRevenueHelperText"} />
-              </Field.HelperText>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("monthlyRevenue")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
-            <Field.Root invalid={!!errors.mrr}>
-              <Field.Label>
-                <Trans i18nKey="mrr" />
-              </Field.Label>
-              <Field.HelperText>
-                <Trans i18nKey="mrrHelperText" />
-              </Field.HelperText>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("mrr")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
+            <CurrencyInput
+              name="monthlyRevenue"
+              error={!!errors.monthlyRevenue}
+              label={t("monthlyRevenue")}
+              helperText={t("monthlyRevenueHelperText")}
+              control={control}
+            />
+            <CurrencyInput
+              name="mrr"
+              error={!!errors.mrr}
+              label={t("mrr")}
+              helperText={t("mrrHelperText")}
+              control={control}
+            />
           </Flex>
           <Flex gap={6} justifyContent={"start"}>
-            <Field.Root invalid={!!errors.activeClients} mt={4}>
-              <Field.Label>
-                <Trans i18nKey="numberOfActiveClients" />
-              </Field.Label>
-              <Field.HelperText>
-                <Trans i18nKey="numberOfActiveClientsHelperText" />
-              </Field.HelperText>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("activeClients")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
-            <Field.Root invalid={!!errors.revenuePerClient}>
-              <Field.Label>
-                <Trans i18nKey="revenuePerClient" />
-              </Field.Label>
-              <Field.HelperText>
-                <Trans i18nKey="revenuePerClientHelperText" />
-              </Field.HelperText>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("revenuePerClient")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
+            <CurrencyInput
+              name="activeClients"
+              error={!!errors.activeClients}
+              label={t("numberOfActiveClients")}
+              helperText={t("numberOfActiveClientsHelperText")}
+              control={control}
+            />
+            <CurrencyInput
+              name="revenuePerClient"
+              error={!!errors.revenuePerClient}
+              label={t("revenuePerClient")}
+              helperText={t("revenuePerClientHelperText")}
+              control={control}
+            />
           </Flex>
           <Box mt={6} fontWeight="bold">
             <Trans i18nKey="directCostInputs" />
           </Box>
           <Flex gap={6} justifyContent={"start"}>
-            <Field.Root invalid={!!errors.developerSalaries}>
-              <Field.Label>
-                <Trans i18nKey="developerSalaries" />
-              </Field.Label>
-              <Field.HelperText>
-                <Trans i18nKey="developerSalariesHelperText" />
-              </Field.HelperText>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("developerSalaries")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
-            <Field.Root invalid={!!errors.top2Salaries}>
-              <Field.Label>
-                <Trans i18nKey="topSalaries" />
-              </Field.Label>
-              <Field.HelperText visibility="hidden">
-                placeholder text
-              </Field.HelperText>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("top2Salaries")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
+            <CurrencyInput
+              name="developerSalaries"
+              error={!!errors.developerSalaries}
+              label={t("developerSalaries")}
+              helperText={t("developerSalariesHelperText")}
+              control={control}
+            />
+            <CurrencyInput
+              name="top2Salaries"
+              error={!!errors.top2Salaries}
+              label={t("topSalaries")}
+              control={control}
+            />
           </Flex>
           <Flex gap={6} justifyContent={"start"}>
-            <Field.Root invalid={!!errors.contracterPayments}>
-              <Field.Label>
-                <Trans i18nKey="contractorPayments" />
-              </Field.Label>
-
-              <Field.HelperText>
-                <Trans i18nKey="contractorPaymentsHelperText" />
-              </Field.HelperText>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("contracterPayments")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
-            <Field.Root invalid={!!errors.softwareLicenses}>
-              <Field.Label>
-                <Trans i18nKey="softwareLicenses" />
-              </Field.Label>
-
-              <Field.HelperText>
-                <Trans i18nKey="softwareLicensesHelperText" />
-              </Field.HelperText>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("softwareLicenses")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
+            <CurrencyInput
+              name="contracterPayments"
+              error={!!errors.contracterPayments}
+              label={t("contracterPayments")}
+              helperText={t("contractorPaymentsHelperText")}
+              control={control}
+            />
+            <CurrencyInput
+              name="softwareLicenses"
+              error={!!errors.softwareLicenses}
+              label={t("softwareLicenses")}
+              helperText={t("softwareLicensesHelperText")}
+              control={control}
+            />
           </Flex>
           <Flex gap={6} justifyContent={"start"}>
-            <Field.Root invalid={!!errors.projectSpecificCosts}>
-              <Field.Label>
-                <Trans i18nKey="softwareLicenses" />
-              </Field.Label>
-
-              <Field.HelperText>
-                <Trans i18nKey="softwareLicensesHelperText" />
-              </Field.HelperText>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("projectSpecificCosts")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
+            <CurrencyInput
+              name="projectSpecificCosts"
+              error={!!errors.projectSpecificCosts}
+              label={t("projectSpecificCosts")}
+              helperText={t("projectSpecificCostsHelpterText")}
+              control={control}
+            />
           </Flex>
           <Box mt={6} fontWeight="bold">
             <Trans i18nKey="operatingExpenses" />
           </Box>
           <Flex gap={6} justifyContent={"start"}>
-            <Field.Root invalid={!!errors.officeRent}>
-              <Field.Label>
-                <Trans i18nKey="officeRent" />
-              </Field.Label>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("officeRent")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
-            <Field.Root invalid={!!errors.utilities}>
-              <Field.Label>
-                <Trans i18nKey="utilities" />
-              </Field.Label>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("utilities")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
+            <CurrencyInput
+              name="officeRent"
+              error={!!errors.officeRent}
+              label={t("officeRent")}
+              control={control}
+            />
+            <CurrencyInput
+              name="utilities"
+              error={!!errors.utilities}
+              label={t("utilities")}
+              control={control}
+            />
           </Flex>
           <Flex gap={6} justifyContent={"start"}>
-            <Field.Root invalid={!!errors.adminSalaries}>
-              <Field.Label>
-                <Trans i18nKey="adminSalaries" />
-              </Field.Label>
-              <Field.HelperText>
-                <Trans i18nKey="adminSalariesHelperText" />
-              </Field.HelperText>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("adminSalaries")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
-            <Field.Root invalid={!!errors.marketing}>
-              <Field.Label>
-                <Trans i18nKey="marketing" />
-              </Field.Label>
-              <Field.HelperText>
-                <Trans i18nKey="marketingHelperText" />
-              </Field.HelperText>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("marketing")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
+            <CurrencyInput
+              name="adminSalaries"
+              error={!!errors.adminSalaries}
+              label={t("adminSalaries")}
+              helperText={t("adminSalariesHelperText")}
+              control={control}
+            />
+            <CurrencyInput
+              name="marketing"
+              error={!!errors.marketing}
+              label={t("marketing")}
+              helperText={t("marketingHelperText")}
+              control={control}
+            />
           </Flex>
           <Flex gap={6} justifyContent={"start"}>
-            <Field.Root invalid={!!errors.otherOperatingExpenses} mt={8}>
-              <Field.Label>
-                <Trans i18nKey="otherOperatingExpenses" />
-              </Field.Label>
-              <NumberInput.Root
-                formatOptions={FORMAT_OPTIONS}
-                {...register("otherOperatingExpenses")}
-                max={Number.MAX_SAFE_INTEGER}
-                min={Number.MIN_SAFE_INTEGER}
-              >
-                <NumberInput.Input width={"sm"} mt={2} />
-              </NumberInput.Root>
-              <Field.ErrorText>
-                <Trans i18nKey="errors.requiredField" />
-              </Field.ErrorText>
-            </Field.Root>
+            <CurrencyInput
+              name="otherOperatingExpenses"
+              error={!!errors.otherOperatingExpenses}
+              label={t("otherOperatingExpenses")}
+              control={control}
+            />
             <Field.Root invalid={!!errors.fteRiskLevel} mt={2}>
               <Field.Label>
                 <Trans i18nKey="fteRiskLevel" />
@@ -481,7 +316,14 @@ function App() {
                     onInteractOutside={() => field.onBlur()}
                   >
                     <Combobox.Control>
-                      <Combobox.Input placeholder="Select framework" />
+                      <Combobox.Input
+                        placeholder={t("fteRiskLevel")}
+                        value={
+                          collection.items.find(
+                            (item) => item.value === field.value,
+                          )?.label || ""
+                        }
+                      />
                       <Combobox.IndicatorGroup>
                         <Combobox.ClearTrigger />
                         <Combobox.Trigger />
