@@ -1,6 +1,7 @@
 import { Box, Button, Dialog, Flex } from "@chakra-ui/react";
 import { CompanyEvaluationResponse } from "@shared/schemas";
 import { Trans, useTranslation } from "react-i18next";
+import { currencyFormat } from "../../utils";
 
 type Props = {
   open: boolean;
@@ -27,15 +28,15 @@ export default function DialogCustom({ open, onClose, data }: Props) {
                 justifyContent={"space-between"}
               >
                 <Trans i18nKey="calculation.annualRevenue" />
-                <span>{data?.annualRevenue}</span>
+                <span>{currencyFormat(data?.annualRevenue ?? 0)}</span>
               </Flex>
               <Flex p={2} justifyContent={"space-between"}>
                 <Trans i18nKey="calculation.developerSalaries" />
-                <span>{data?.developerSalaries}</span>
+                <span>{currencyFormat(data?.developerSalaries ?? 0)}</span>
               </Flex>
               <Flex p={2} justifyContent={"space-between"}>
                 <Trans i18nKey="calculation.otherDirectCost" />
-                <span>{data?.otherDirectCost}</span>
+                <span>{currencyFormat(data?.otherDirectCost ?? 0)}</span>
               </Flex>
               <Flex
                 p={2}
@@ -43,11 +44,11 @@ export default function DialogCustom({ open, onClose, data }: Props) {
                 justifyContent={"space-between"}
               >
                 <Trans i18nKey="calculation.grossProfit" />
-                <span>{data?.grossProfit}</span>
+                <span>{currencyFormat(data?.grossProfit ?? 0)}</span>
               </Flex>
               <Flex p={2} justifyContent={"space-between"}>
                 <Trans i18nKey="calculation.operatingExpenses" />
-                <span>{data?.operatingExpenses}</span>
+                <span>{currencyFormat(data?.operatingExpenses ?? 0)}</span>
               </Flex>
               <Flex
                 p={2}
@@ -55,15 +56,15 @@ export default function DialogCustom({ open, onClose, data }: Props) {
                 backgroundColor={"forestGreen"}
               >
                 <Trans i18nKey="calculation.ebidta" />
-                <span>{data?.ebidta}</span>
+                <span>{currencyFormat(data?.ebidta ?? 0)}</span>
               </Flex>
               <Flex p={2} justifyContent={"space-between"}>
                 <Trans i18nKey="calculation.ebidtaPercent" />
-                <span>{data?.ebidtaPercentage} %</span>
+                <span>{Number(data?.ebidtaPercentage)?.toFixed(1)} %</span>
               </Flex>
               <Flex p={2} justifyContent={"space-between"}>
                 <Trans i18nKey="calculation.tax" />
-                <span>{data?.tax}</span>
+                <span>{currencyFormat(data?.tax ?? 0)}</span>
               </Flex>
               <Flex
                 mt={4}
@@ -72,23 +73,23 @@ export default function DialogCustom({ open, onClose, data }: Props) {
                 justifyContent={"space-between"}
               >
                 <Trans i18nKey="calculation.netProfit" />
-                <span>{data?.netProfit}</span>
+                <span>{currencyFormat(data?.netProfit ?? 0)}</span>
               </Flex>
               <Flex p={2} justifyContent={"space-between"}>
                 <Trans i18nKey="calculation.profitMargin" />
-                <span>{data?.profitMarginPercentage} %</span>
+                <span>{currencyFormat(data?.profitMarginPercentage ?? 0)}</span>
               </Flex>
               <Flex p={2} justifyContent={"space-between"}>
                 <Trans i18nKey="calculation.mrr" />
-                <span>{data?.mrr} %</span>
+                <span>{Number(data?.mrr)?.toFixed(1)} %</span>
               </Flex>
               <Flex p={2} justifyContent={"space-between"}>
                 <Trans i18nKey="calculation.clientConcentration" />
-                <span>{data?.clientConcentration} %</span>
+                <span>{Number(data?.clientConcentration)?.toFixed(1)} %</span>
               </Flex>
               <Flex p={2} justifyContent={"space-between"}>
                 <Trans i18nKey="calculation.valuation" />
-                <span>{data?.valuation}</span>
+                <span>{currencyFormat(data?.valuation ?? 0)}</span>
               </Flex>
             </Box>
           </Dialog.Body>
