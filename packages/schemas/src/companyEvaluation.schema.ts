@@ -28,13 +28,17 @@ export const companyDetailsSchema = z.object({
   name: z.string().min(1, "Field cannot be empty."),
   industry: z.string().min(1, "Field cannot be empty."),
   numberOfEmployees: z.string().min(1, "Field cannot be empty."),
-  step: z.enum([
-    ValuationStep.CompanyDetails,
-    ValuationStep.RevenueDetails,
-    ValuationStep.OperatingExpenses,
-    ValuationStep.DirectConstDetails,
-  ]),
+  step: ValuationStep.CompanyDetails,
 });
 
+export const revenueDetailsSchema = z.object({
+  monthlyRevenue: z.string().min(1, "Field cannot be empty."),
+  mrr: z.string().min(1, "Field cannot be empty."),
+  numberOfActiveClients: z.string().min(1, "Field cannot be empty."),
+  revenuePerClient: z.string().min(1, "Field cannot be empty."),
+  step: ValuationStep.RevenueDetails,
+});
+
+export type RevenueDetailsDto = z.infer<typeof revenueDetailsSchema>;
 export type CompanyDetailsDto = z.infer<typeof companyDetailsSchema>;
 export type CompanyEvaluateDto = z.infer<typeof companyEvaluateSchema>;

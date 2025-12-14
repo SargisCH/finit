@@ -161,10 +161,4 @@ export class CompanyEvaluationService {
       rFinal: rFinal.toString(),
     };
   }
-  async saveStepDetails(
-    details: CompanyDetailsDto,
-  ): Promise<(CompanyDetailsDto & { id: string }) | undefined> {
-    if (details.step === ValuationStep.CompanyDetails) {
-    }
-  }
 }
