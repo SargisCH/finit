@@ -12,6 +12,7 @@ import {
   useListCollection,
   Portal,
   useFilter,
+  Text,
 } from "@chakra-ui/react";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -355,6 +356,7 @@ function App() {
 
           <Flex justifyContent={"center"} mt={6}>
             <Button
+              colorPalette={"green"}
               width={"2xs"}
               type="submit"
               disabled={loading}

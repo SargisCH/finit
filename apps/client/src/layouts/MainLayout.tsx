@@ -20,6 +20,7 @@ const MainLayout: React.FC<React.PropsWithChildren<Props>> = ({ children }) => {
   return (
     <Box>
       <Flex
+        bg={"brandBg"}
         px={10}
         py={5}
         justifyContent={"space-between"}
@@ -54,6 +55,7 @@ const MainLayout: React.FC<React.PropsWithChildren<Props>> = ({ children }) => {
         </Menu.Root>
       </Flex>
       <Box>{children}</Box>
+      <Box mt={4} p={20} bg={"brandBg"}></Box>
     </Box>
   );
 };

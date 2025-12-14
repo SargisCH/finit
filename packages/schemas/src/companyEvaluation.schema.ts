@@ -1,3 +1,4 @@
+import { ValuationStep } from "@shared/types";
 import { z } from "zod";
 
 export const companyEvaluateSchema = z
@@ -23,4 +24,17 @@ export const companyEvaluateSchema = z
   })
   .required();
 
+export const companyDetailsSchema = z.object({
+  name: z.string().min(1, "Field cannot be empty."),
+  industry: z.string().min(1, "Field cannot be empty."),
+  numberOfEmployees: z.string().min(1, "Field cannot be empty."),
+  step: z.enum([
+    ValuationStep.CompanyDetails,
+    ValuationStep.RevenueDetails,
+    ValuationStep.OperatingExpenses,
+    ValuationStep.DirectConstDetails,
+  ]),
+});
+
+export type CompanyDetailsDto = z.infer<typeof companyDetailsSchema>;
 export type CompanyEvaluateDto = z.infer<typeof companyEvaluateSchema>;

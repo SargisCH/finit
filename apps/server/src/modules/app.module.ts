@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { configService } from '../configuration';
 import { CompanyEvaluationModule } from './companyEvaluation/companyEvaluation.module';
-
 @Module({
   imports: [
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),

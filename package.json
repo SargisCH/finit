@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@shared/schemas": "workspace:*",
+    "@shared/types": "workspace:*",
     "server": "workspace:*"
   }
 }

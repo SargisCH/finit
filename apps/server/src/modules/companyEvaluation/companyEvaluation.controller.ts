@@ -3,6 +3,7 @@ import { CompanyEvaluationService } from './companyEvaluation.service';
 import { ZodValidationPipe } from 'src/common/pipes/validation.pipe';
 import { companyEvaluateSchema } from '@shared/schemas';
 import type {
+  CompanyDetailsDto,
   CompanyEvaluateDto,
   CompanyEvaluationResponse,
 } from '@shared/schemas';
@@ -24,5 +25,12 @@ export class CompanyEvaluationController {
   ): CompanyEvaluationResponse {
     console.log('create cat dto', createCatDto);
     return this.companyEvaluationService.evaluate(createCatDto);
+  }
+  @Post('/companyDetails')
+  @UsePipes(new ZodValidationPipe(companyEvaluateSchema))
+  saveCompanyDetails(
+    @Body() companyDetails: CompanyDetailsDto,
+  ): Promise<(CompanyDetailsDto & { id: string }) | undefined> {
+    return this.companyEvaluationService.saveStepDetails(companyDetails);
   }
 }

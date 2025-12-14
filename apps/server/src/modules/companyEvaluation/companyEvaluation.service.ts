@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import type {
+  CompanyDetailsDto,
   CompanyEvaluateDto,
   CompanyEvaluationResponse,
 } from '@shared/schemas';
+import { ValuationStep } from '@shared/types';
 import Big from 'big.js';
+import { ValuationWip } from 'src/model/valuationWip.entity';
+import { Repository } from 'typeorm';
 
 enum FteLevels {
   HIGH = 'HIGH',
@@ -70,6 +74,7 @@ function getRRcrCorrection(clientConcentration: Big): number {
 
 @Injectable()
 export class CompanyEvaluationService {
+  private valuationWIPRepository: Repository<ValuationWip>;
   evaluate(
     companyEvaluationDto: CompanyEvaluateDto,
   ): CompanyEvaluationResponse {
@@ -155,5 +160,11 @@ export class CompanyEvaluationService {
       rRcrCorrection: rRcrCorrection.toString(),
       rFinal: rFinal.toString(),
     };
+  }
+  async saveStepDetails(
+    details: CompanyDetailsDto,
+  ): Promise<(CompanyDetailsDto & { id: string }) | undefined> {
+    if (details.step === ValuationStep.CompanyDetails) {
+    }
   }
 }
