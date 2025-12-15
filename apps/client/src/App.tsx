@@ -1,25 +1,21 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ValuationWizard from "./pages/ValuationWizard";
 import StartPage from "./pages/StartPage";
-import { useCallback } from "react";
-import { ValuationStep } from "../../../packages/types/dist";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<StartPage />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/valuation-wizard/:step" element={<ValuationWizard />} />
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<StartPage />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/valuation-wizard/:step" element={<ValuationWizard />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

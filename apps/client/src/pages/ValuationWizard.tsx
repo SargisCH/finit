@@ -3,6 +3,8 @@ import { useCallback } from "react";
 import { LuChevronLeft } from "react-icons/lu";
 import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
 import { ValuationStep } from "../../../../packages/types/dist";
+import { useMutation } from "@tanstack/react-query";
+import { startValuation } from "../api/valuation";
 
 function Progress({
   currentStep,

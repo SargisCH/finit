@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CompanyDetailsDto, RevenueDetailsDto } from '@shared/schemas';
 import { Status, ValuationStep } from '@shared/types';
 import { ValuationWip } from 'src/model/valuationWip.entity';
@@ -6,6 +7,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class CompanyEvaluationWipService {
+  @InjectRepository(ValuationWip)
   private valuationWIPRepository: Repository<ValuationWip>;
 
   async startEvaluationProcess() {

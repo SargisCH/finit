@@ -41,6 +41,7 @@ class ConfigService {
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       migrationsTableName: 'migration',
       migrations: ['src/migration/*.ts'],
+      synchronize: !this.isProduction(),
       ssl: this.isProduction(),
     };
   }

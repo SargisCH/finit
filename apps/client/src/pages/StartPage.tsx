@@ -2,13 +2,24 @@ import { Box, Button, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ValuationStep } from "../../../../packages/types/dist";
+import { useMutation } from "@tanstack/react-query";
+import { startValuation } from "../api/valuation";
+import { CompanyDetailsDto } from "@shared/schemas";
 
 const StartPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleStartValuation = () => {
-    navigate(`/valuation-wizard/${ValuationStep.CompanyDetails}`); // Assuming this is the route for the valuation wizard
+    mutate();
   };
+
+  const { mutate } = useMutation({
+    mutationFn: startValuation,
+    onSuccess: (data: CompanyDetailsDto & { id: string }) => {
+      console.log("data", data);
+      navigate(`/valuation-wizard/${data.id}/${ValuationStep.CompanyDetails}`);
+    },
+  });
 
   return (
     <Box
