@@ -1,11 +1,8 @@
-import { Body, Controller, Get, Post, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UsePipes } from '@nestjs/common';
 import { CompanyEvaluationService } from './companyEvaluation.service';
 import { ZodValidationPipe } from 'src/common/pipes/validation.pipe';
 import { companyEvaluateSchema } from '@shared/schemas';
-import type {
-  CompanyEvaluateDto,
-  CompanyEvaluationResponse,
-} from '@shared/schemas';
+import type { CompanyEvaluationResponse } from '@shared/schemas';
 
 @Controller('/companyEvaluation')
 export class CompanyEvaluationController {
@@ -13,16 +10,8 @@ export class CompanyEvaluationController {
     private readonly companyEvaluationService: CompanyEvaluationService,
   ) {}
 
-  @Get('/evaluate')
-  getHello(): string {
-    return 'sadasd';
-  }
-  @Post('/evaluate')
-  @UsePipes(new ZodValidationPipe(companyEvaluateSchema))
-  evaluate(
-    @Body() createCatDto: CompanyEvaluateDto,
-  ): CompanyEvaluationResponse {
-    console.log('create cat dto', createCatDto);
-    return this.companyEvaluationService.evaluate(createCatDto);
+  @Get(':id/evaluate')
+  evaluate(@Param('id') id: string): Promise<CompanyEvaluationResponse> {
+    return this.companyEvaluationService.evaluate(id);
   }
 }

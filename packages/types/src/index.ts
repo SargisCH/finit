@@ -9,3 +9,9 @@ export enum Status {
   InProgress = "InProgress",
   Completed = "Completed",
 }
+
+export enum FteLevels {
+  HIGH = "HIGH",
+  MEDIUM = "MEDIUM",
+  LOW = "LOW",
+}

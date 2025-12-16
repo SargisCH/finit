@@ -2,6 +2,7 @@ import { Box, Flex, Menu, Portal, Image } from "@chakra-ui/react";
 import usFlag from "../assets/united-states-svgrepo-com.svg";
 import armFlag from "../assets/armenia-svgrepo-com.svg";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const icons = {
   en: usFlag,
@@ -12,6 +13,7 @@ type Props = {};
 
 const MainLayout: React.FC<React.PropsWithChildren<Props>> = ({ children }) => {
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
   const selectedLanguage = (i18n.resolvedLanguage ??
     "en") as keyof typeof icons;
   const handleLanguageChange = (lng: string) => {
@@ -27,7 +29,7 @@ const MainLayout: React.FC<React.PropsWithChildren<Props>> = ({ children }) => {
         borderBottomColor={"lightgray"}
         borderBottomWidth={"1px"}
       >
-        <img src="" alt={"logo image"} />
+        <img src="" alt={"logo image"} onClick={() => navigate("/")} />
         <Menu.Root>
           <Menu.Trigger asChild>
             <Image src={icons[selectedLanguage]} width={"6"} />

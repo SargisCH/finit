@@ -10,10 +10,10 @@ const responseHandler = async (response: Response) => {
   return response.json();
 };
 
-export const get = async (
+export const get = async <T>(
   endpoint: string,
   queryParams?: Record<string | number, string | number>,
-) => {
+): Promise<T> => {
   return fetch(`${baseUrl}/${endpoint}`).then(responseHandler);
 };
 export const post = async <T extends Object, R extends Object>(
@@ -22,12 +22,18 @@ export const post = async <T extends Object, R extends Object>(
 ): Promise<R> => {
   return fetch(`${baseUrl}/${endpoint}`, {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(body),
   }).then(responseHandler);
 };
 export const put = async <T extends Object>(endpoint: string, body: T) => {
   return fetch(`${baseUrl}/${endpoint}`, {
     method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(body),
   }).then(responseHandler);
 };

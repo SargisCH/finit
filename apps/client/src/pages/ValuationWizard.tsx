@@ -1,89 +1,84 @@
-import { Box, Button, Flex, Span, Link } from "@chakra-ui/react";
-import { useCallback } from "react";
-import { LuChevronLeft } from "react-icons/lu";
-import { Link as RouterLink, useNavigate, useParams } from "react-router-dom";
+import { useCallback, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { ValuationStep } from "../../../../packages/types/dist";
-import { useMutation } from "@tanstack/react-query";
-import { startValuation } from "../api/valuation";
+import { useQuery } from "@tanstack/react-query";
+import { getValuationProgress } from "../api/valuation";
+import { EvaluationProgress } from "@shared/schemas";
+import Wizard from "../components/shared/Wizard";
+import CompanyDetails from "../components/features/valuationForms/CompanyDetails";
+import RevenueDetails from "../components/features/valuationForms/RevenueDetails";
+import DirectCostDetails from "../components/features/valuationForms/DirectCostDetails";
+import OperatingExpensesDetails from "../components/features/valuationForms/OperatingExpensesDetails";
+import { Box } from "@chakra-ui/react";
 
-function Progress({
-  currentStep,
-  totalSteps,
-}: {
-  currentStep: number;
-  totalSteps: number;
-}) {
-  const progressWidth = (currentStep / totalSteps) * 100;
-  return (
-    <Box position="relative">
-      <Box
-        width="100%"
-        background="gray.300"
-        borderRadius={20}
-        height={6}
-      ></Box>
-      <Box
-        width={`${progressWidth}%`}
-        background="green.500"
-        borderRadius={20}
-        height={6}
-        position={"absolute"}
-        top={0}
-      ></Box>
-    </Box>
-  );
-}
 const steps = {
   [ValuationStep.CompanyDetails]: 1,
   [ValuationStep.RevenueDetails]: 2,
   [ValuationStep.DirectConstDetails]: 3,
   [ValuationStep.OperatingExpenses]: 4,
 };
+
+function getWizardComponent(step: ValuationStep, onSubmitHandler: () => void) {
+  switch (step) {
+    case ValuationStep.CompanyDetails:
+      return <CompanyDetails onSubmitHandler={onSubmitHandler} />;
+    case ValuationStep.RevenueDetails:
+      return <RevenueDetails onSubmitHandler={onSubmitHandler} />;
+    case ValuationStep.DirectConstDetails:
+      return <DirectCostDetails onSubmitHandler={onSubmitHandler} />;
+    case ValuationStep.OperatingExpenses:
+      return <OperatingExpensesDetails onSubmitHandler={onSubmitHandler} />;
+  }
+}
+
 export default function ValuationWizard() {
   const navigate = useNavigate();
   const params = useParams();
-  const currentStep = steps[params.step as ValuationStep];
-  const totalSteps = Object.keys(steps).length;
-  const nextHandler = useCallback(
-    (currentStep: string) => {
-      switch (currentStep) {
-        case ValuationStep.CompanyDetails:
-          navigate(`/valuation-wizard/${ValuationStep.RevenueDetails}`);
-          return;
-        case ValuationStep.RevenueDetails:
-          navigate(`/valuation-wizard/${ValuationStep.DirectConstDetails}`);
-          return;
-        case ValuationStep.DirectConstDetails:
-          navigate(`/valuation-wizard/${ValuationStep.OperatingExpenses}`);
-          return;
-      }
+  const { data: evaluationProgress } = useQuery<EvaluationProgress>({
+    queryKey: [params.id],
+    queryFn: () => {
+      return !params.id
+        ? ({} as EvaluationProgress)
+        : getValuationProgress(params.id);
     },
-    [currentStep],
-  );
-  return (
-    <Box py={12} px={6} direction="column" width="60%" mx="auto">
-      <Flex justifyContent="space-between">
-        <Link onClick={() => navigate("/")}>
-          <LuChevronLeft />
-          <Span> Back</Span>
-        </Link>
-        <Span>
-          {currentStep} / {totalSteps}
-        </Span>
-      </Flex>
+  });
 
-      <Progress totalSteps={totalSteps} currentStep={currentStep} />
-      <Box>Step one</Box>
-      <Flex justifyContent={"end"}>
-        {currentStep < totalSteps ? (
-          <Button
-            colorPalette={"green"}
-            onClick={() => nextHandler(params.step as ValuationStep)}
-          >
-            Next
-          </Button>
-        ) : null}
-      </Flex>
+  const currentStep = steps[params.step as ValuationStep];
+  useEffect(() => {
+    if (!evaluationProgress?.data.find((item) => item.step === params.step)) {
+      navigate(
+        `/valuation-wizard/${evaluationProgress?.id}/${evaluationProgress?.currentStep}`,
+      );
+    }
+  }, [evaluationProgress?.data]);
+  const totalSteps = Object.keys(steps).length;
+  const nextHandler = useCallback(() => {
+    switch (params.step) {
+      case ValuationStep.CompanyDetails:
+        navigate(
+          `/valuation-wizard/${params.id}/${ValuationStep.RevenueDetails}`,
+        );
+        return;
+      case ValuationStep.RevenueDetails:
+        navigate(
+          `/valuation-wizard/${params.id}/${ValuationStep.DirectConstDetails}`,
+        );
+        return;
+      case ValuationStep.DirectConstDetails:
+        navigate(
+          `/valuation-wizard/${params.id}/${ValuationStep.OperatingExpenses}`,
+        );
+        return;
+      case ValuationStep.OperatingExpenses:
+        navigate(`/valuation-wizard/${params.id}/result`);
+        return;
+    }
+  }, [currentStep]);
+  return (
+    <Box minH="100vh">
+      <Wizard currentStep={currentStep} totalSteps={totalSteps}>
+        {getWizardComponent(params.step as ValuationStep, nextHandler)}
+      </Wizard>
     </Box>
   );
 }

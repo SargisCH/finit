@@ -10,5 +10,6 @@ import { ValuationWip } from 'src/model/valuationWip.entity';
   ],
   controllers: [CompanyEvaluationWipController],
   providers: [CompanyEvaluationWipService],
+  exports: [CompanyEvaluationWipService],
 })
 export class CompanyEvaluationWipModule {}

@@ -1,10 +1,8 @@
 import { Box, Button, Text, VStack } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { ValuationStep } from "../../../../packages/types/dist";
 import { useMutation } from "@tanstack/react-query";
 import { startValuation } from "../api/valuation";
-import { CompanyDetailsDto } from "@shared/schemas";
 
 const StartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -15,9 +13,8 @@ const StartPage: React.FC = () => {
 
   const { mutate } = useMutation({
     mutationFn: startValuation,
-    onSuccess: (data: CompanyDetailsDto & { id: string }) => {
-      console.log("data", data);
-      navigate(`/valuation-wizard/${data.id}/${ValuationStep.CompanyDetails}`);
+    onSuccess: (data) => {
+      navigate(`/valuation-wizard/${data.id}/${data.currentStep}`);
     },
   });
 

@@ -29,9 +29,7 @@ i18next
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider>
-      <MainLayout>
-        <App />
-      </MainLayout>
+      <App />
     </Provider>
   </StrictMode>,
 );

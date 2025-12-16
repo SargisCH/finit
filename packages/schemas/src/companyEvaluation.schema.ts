@@ -38,7 +38,26 @@ export const revenueDetailsSchema = z.object({
   revenuePerClient: z.string().min(1, "Field cannot be empty."),
   step: ValuationStep.RevenueDetails,
 });
+export const directCostSchema = z.object({
+  developerSalaries: z.string().min(1, "Field cannot be empty."),
+  top2Salaries: z.string().min(1, "Field cannot be empty."),
+  contracterPayments: z.string().optional().default("0"),
+  softwareLicenses: z.string().optional().default("0"),
+  projectSpecificCosts: z.string().optional().default("0"),
+  step: ValuationStep.DirectConstDetails,
+});
+export const operatingExpensesSchema = z.object({
+  officeRent: z.string().optional().default("0"),
+  utilities: z.string().optional().default("0"),
+  adminSalaries: z.string().optional().default("0"),
+  marketing: z.string().optional().default("0"),
+  otherOperatingExpenses: z.string().optional().default("0"),
+  fteRiskLevel: z.string().optional(),
+  step: ValuationStep.OperatingExpenses,
+});
 
 export type RevenueDetailsDto = z.infer<typeof revenueDetailsSchema>;
+export type DirectCostDto = z.infer<typeof directCostSchema>;
+export type OperatingExpensesDto = z.infer<typeof operatingExpensesSchema>;
 export type CompanyDetailsDto = z.infer<typeof companyDetailsSchema>;
 export type CompanyEvaluateDto = z.infer<typeof companyEvaluateSchema>;

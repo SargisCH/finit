@@ -1,11 +1,5 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Status, ValuationStep } from '@shared/types';
-
-enum FteLevels {
-  HIGH = 'HIGH',
-  MEDIUM = 'MEDIUM',
-  LOW = 'LOW',
-}
+import { Status, ValuationStep, FteLevels } from '@shared/types';
 
 @Entity({ name: 'valuation_wip' })
 export class ValuationWip extends BaseEntity {
@@ -50,7 +44,7 @@ export class ValuationWip extends BaseEntity {
         adminSalaries: number;
         marketing: number;
         otherOperatingExpenses: number;
-        fteRiskLevel: FteLevels;
+        fteRiskLevel: FteLevels | undefined;
         status: string;
         step: ValuationStep.OperatingExpenses;
       }
