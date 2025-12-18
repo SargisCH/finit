@@ -6,7 +6,7 @@ import {
   EvaluationProgress,
 } from "@shared/schemas";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
 import {
   evaluateRevenueDetails,
@@ -32,7 +32,6 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
 
   const {
     handleSubmit,
-    register,
     control,
     formState: { errors },
     reset,
@@ -42,10 +41,10 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
   });
   useEffect(() => {
     reset({
-      monthlyRevenue: String(revenueDetails?.monthlyRevenue ?? 0),
-      mrr: String(revenueDetails?.mrr ?? 0),
-      numberOfActiveClients: String(revenueDetails?.numberOfActiveClients ?? 0),
-      revenuePerClient: String(revenueDetails?.revenuePerClient ?? 0),
+      monthlyRevenue: revenueDetails?.monthlyRevenue ?? 0,
+      mrr: revenueDetails?.mrr ?? 0,
+      numberOfActiveClients: revenueDetails?.numberOfActiveClients ?? 0,
+      revenuePerClient: revenueDetails?.revenuePerClient ?? 0,
     });
   }, [revenueDetails, reset]);
   const { mutate } = useMutation({
@@ -68,7 +67,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
     >
       <Flex m={"auto"} width={"4xl"} gap={2} direction={"column"}>
         <Box mt={6} fontWeight="bold">
-          <Trans i18nKey="directCostInputs" />
+          <Trans i18nKey="revenueInputs" />
         </Box>
         <Flex gap={6} justifyContent={"start"}>
           <CurrencyInput
@@ -87,23 +86,32 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
           />
         </Flex>
         <Flex gap={6} justifyContent={"start"}>
-          <Field.Root invalid={!!errors.numberOfActiveClients}>
-            <Field.Label>
-              <Trans i18nKey="numberOfActiveClients" />
-            </Field.Label>
+          <Controller
+            name="numberOfActiveClients"
+            control={control}
+            render={({ field: { onChange } }) => {
+              return (
+                <Field.Root invalid={!!errors.numberOfActiveClients}>
+                  <Field.Label>
+                    <Trans i18nKey="numberOfActiveClients" />
+                  </Field.Label>
 
-            <NumberInput.Root
-              {...register("numberOfActiveClients")}
-              max={Number.MAX_SAFE_INTEGER}
-              min={Number.MIN_SAFE_INTEGER}
-            >
-              <NumberInput.Input width={"sm"} mt={2} />
-            </NumberInput.Root>
+                  <NumberInput.Root
+                    onValueChange={(details) => onChange(details.valueAsNumber)}
+                    max={Number.MAX_SAFE_INTEGER}
+                    min={Number.MIN_SAFE_INTEGER}
+                  >
+                    <NumberInput.Input width={"sm"} mt={2} />
+                  </NumberInput.Root>
 
-            <Field.ErrorText>
-              <Trans i18nKey="errors.requiredField" />
-            </Field.ErrorText>
-          </Field.Root>
+                  <Field.ErrorText>
+                    <Trans i18nKey="errors.requiredField" />
+                  </Field.ErrorText>
+                </Field.Root>
+              );
+            }}
+          />
+
           <CurrencyInput
             name="revenuePerClient"
             error={!!errors.revenuePerClient}

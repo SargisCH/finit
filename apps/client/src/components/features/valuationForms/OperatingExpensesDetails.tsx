@@ -58,13 +58,12 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
   });
   useEffect(() => {
     reset({
-      adminSalaries: String(operatingExpensesDetails?.adminSalaries ?? 0),
-      officeRent: String(operatingExpensesDetails?.officeRent ?? 0),
-      marketing: String(operatingExpensesDetails?.marketing ?? 0),
-      otherOperatingExpenses: String(
+      adminSalaries: operatingExpensesDetails?.adminSalaries ?? 0,
+      officeRent: operatingExpensesDetails?.officeRent ?? 0,
+      marketing: operatingExpensesDetails?.marketing ?? 0,
+      otherOperatingExpenses:
         operatingExpensesDetails?.otherOperatingExpenses ?? 0,
-      ),
-      utilities: String(operatingExpensesDetails?.utilities ?? 0),
+      utilities: operatingExpensesDetails?.utilities ?? 0,
       fteRiskLevel: operatingExpensesDetails?.fteRiskLevel,
     });
   }, [operatingExpensesDetails, reset]);

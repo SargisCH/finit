@@ -8,11 +8,6 @@ import {
 } from 'typeorm';
 import { ValuationWip } from './valuationWip.entity';
 
-enum FteLevels {
-  HIGH = 'HIGH',
-  MEDIUM = 'MEDIUM',
-  LOW = 'LOW',
-}
 @Entity({ name: 'valuations' })
 export class Valuation extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
@@ -22,68 +17,68 @@ export class Valuation extends BaseEntity {
   @JoinColumn()
   wip: ValuationWip;
 
-  @Column('varchar')
-  annualRevenue: string;
+  @Column('numeric')
+  annualRevenue: number;
 
-  @Column('varchar')
-  developerSalaries: string;
+  @Column('numeric')
+  developerSalaries: number;
 
-  @Column('varchar')
-  otherDirectCost: string;
+  @Column('numeric')
+  otherDirectCost: number;
 
-  @Column('varchar')
-  grossProfit: string;
+  @Column('numeric')
+  grossProfit: number;
 
-  @Column('varchar')
-  operatingExpenses: string;
+  @Column('numeric')
+  operatingExpenses: number;
 
-  @Column('varchar')
-  ebidta: string;
+  @Column('numeric')
+  ebidta: number;
 
-  @Column('varchar')
-  ebidtaPercentage: string;
+  @Column('numeric')
+  ebidtaPercentage: number;
 
-  @Column('varchar')
-  tax: string;
+  @Column('numeric')
+  tax: number;
 
-  @Column('varchar')
-  netProfit: string;
+  @Column('numeric')
+  netProfit: number;
 
-  @Column('varchar')
-  profitMarginPercentage: string;
+  @Column('int')
+  profitMarginPercentage: number;
 
-  @Column('varchar')
-  mrr: string;
+  @Column('int')
+  mrr: number;
 
-  @Column('varchar')
-  clientConcentration: string;
+  @Column('int')
+  clientConcentration: number;
 
-  @Column('varchar')
-  valuation: string;
+  @Column('numeric')
+  valuation: number;
 
-  @Column('varchar')
-  pMultiple: string;
+  @Column('numeric')
+  pMultiple: number;
 
-  @Column('varchar')
-  fteCorrection: string;
+  @Column('numeric')
+  fteCorrection: number;
 
-  @Column('varchar')
-  rcrCorrection: string;
+  @Column('numeric')
+  rcrCorrection: number;
 
-  @Column('varchar')
-  pFinal: string;
+  @Column('numeric')
+  pFinal: number;
 
-  @Column('varchar')
-  rMultiple: string;
+  @Column('numeric')
+  rMultiple: number;
 
-  @Column('varchar')
-  rFteCorrection: string;
+  @Column('numeric')
+  rFteCorrection: number;
 
-  @Column('varchar')
-  rRcrCorrection: string;
+  @Column('numeric')
+  rRcrCorrection: number;
 
-  @Column('varchar')
-  rFinal: string;
+  @Column('numeric')
+  rFinal: number;
 
   @Column({
     default: () => 'CURRENT_TIMESTAMP',

@@ -14,8 +14,8 @@ import {
 } from "@shared/schemas";
 import { ValuationStep } from "@shared/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { Trans } from "react-i18next";
+import { Controller, useForm } from "react-hook-form";
+import { Trans, useTranslation } from "react-i18next";
 import {
   evaluateCompanyDetails,
   getValuationProgress,
@@ -27,6 +27,7 @@ type Props = { onSubmitHandler: () => void };
 
 export default function CompanyDetails({ onSubmitHandler }: Props) {
   const params = useParams();
+  const { t } = useTranslation();
   const { data: evaluationProgress } = useQuery<EvaluationProgress>({
     queryKey: [params.id],
     queryFn: () => getValuationProgress(params.id as string),
@@ -37,6 +38,7 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
 
   const {
     handleSubmit,
+    control,
     register,
     formState: { errors },
     reset,
@@ -48,7 +50,7 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
     reset({
       name: companyDetails?.companyName ?? "",
       industry: companyDetails?.industry ?? "",
-      numberOfEmployees: String(companyDetails?.numberOfEmployees ?? ""),
+      numberOfEmployees: companyDetails?.numberOfEmployees,
     });
   }, [companyDetails, reset]);
   const { mutate } = useMutation({
@@ -66,7 +68,7 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
     <form
       id="companyDetailsForm"
       onSubmit={(e) => {
-        e.preventDefault(); // Prevent default form submission behavior
+        e.preventDefault();
         handleSubmit(onSubmit)();
       }}
     >
@@ -76,59 +78,48 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
         </Span>
         <Flex gap={6} justifyContent={"start"}>
           <Field.Root invalid={!!errors.name}>
-            <Field.Label>
-              <Trans i18nKey="companyName" />
-            </Field.Label>
-            <Field.HelperText>
-              <Trans i18nKey="nameOfYourCompany" />
-            </Field.HelperText>
+            <Field.Label>{t("companyName")}</Field.Label>
+            <Field.HelperText>{t("nameOfYourCompany")}</Field.HelperText>
             <Input placeholder="name" mt={2} {...register("name")} width="xs" />
-
-            <Field.ErrorText>
-              <Trans i18nKey="errors.requiredField" />
-            </Field.ErrorText>
+            <Field.ErrorText>{t("errors.requiredField")}</Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!errors.industry}>
-            <Field.Label>
-              <Trans i18nKey="industry" />
-            </Field.Label>
-            <Field.HelperText>
-              <Trans i18nKey="typeOfItService" />
-            </Field.HelperText>
+            <Field.Label>{t("industry")}</Field.Label>
+            <Field.HelperText>{t("typeOfItService")}</Field.HelperText>
             <Input
               placeholder="industry"
               mt={2}
               {...register("industry")}
               width={"xs"}
             />
-            <Field.ErrorText>
-              <Trans i18nKey="errors.requiredField" />
-            </Field.ErrorText>
+            <Field.ErrorText>{t("errors.requiredField")}</Field.ErrorText>
           </Field.Root>
         </Flex>
         <Flex gap={6} justifyContent={"start"}>
-          <Field.Root invalid={!!errors.numberOfEmployees}>
-            <Field.Label>
-              <Trans i18nKey="numberOfEmployees" />
-            </Field.Label>
-
-            <NumberInput.Root
-              {...register("numberOfEmployees")}
-              max={Number.MAX_SAFE_INTEGER}
-              min={Number.MIN_SAFE_INTEGER}
-            >
-              <NumberInput.Input mt={2} width={"xs"} />
-            </NumberInput.Root>
-
-            <Field.ErrorText>
-              <Trans i18nKey="errors.requiredField" />
-            </Field.ErrorText>
-          </Field.Root>
+          <Controller
+            name="numberOfEmployees"
+            control={control}
+            render={({ field: { onChange } }) => {
+              return (
+                <Field.Root invalid={!!errors.numberOfEmployees}>
+                  <Field.Label>{t("numberOfEmployees")}</Field.Label>
+                  <NumberInput.Root
+                    max={Number.MAX_SAFE_INTEGER}
+                    min={Number.MIN_SAFE_INTEGER}
+                    onValueChange={(details) => onChange(details.valueAsNumber)}
+                  >
+                    <NumberInput.Input mt={2} width={"xs"} />
+                  </NumberInput.Root>
+                  <Field.ErrorText>{t("errors.requiredField")}</Field.ErrorText>
+                </Field.Root>
+              );
+            }}
+          />
         </Flex>
       </Flex>
       <Flex justifyContent="end" mt={10}>
         <Button colorPalette="green" type="submit">
-          Next
+          {t("next")}
         </Button>
       </Flex>
     </form>

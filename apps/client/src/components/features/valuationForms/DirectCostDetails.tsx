@@ -41,13 +41,11 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
   });
   useEffect(() => {
     reset({
-      developerSalaries: String(directCostDetails?.developerSalaries ?? 0),
-      top2Salaries: String(directCostDetails?.top2Salaries ?? 0),
-      projectSpecificCosts: String(
-        directCostDetails?.projectSpecificCosts ?? 0,
-      ),
-      contracterPayments: String(directCostDetails?.contractorPayments ?? 0),
-      softwareLicenses: String(directCostDetails?.softwareLicenses ?? 0),
+      developerSalaries: directCostDetails?.developerSalaries ?? 0,
+      top2Salaries: directCostDetails?.top2Salaries ?? 0,
+      projectSpecificCosts: directCostDetails?.projectSpecificCosts ?? 0,
+      contracterPayments: directCostDetails?.contractorPayments ?? 0,
+      softwareLicenses: directCostDetails?.softwareLicenses ?? 0,
     });
   }, [directCostDetails, reset]);
   const { mutate } = useMutation({
@@ -70,7 +68,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
     >
       <Flex m={"auto"} width={"4xl"} gap={2} direction={"column"}>
         <Box mt={6} fontWeight="bold">
-          <Trans i18nKey="revenueInputs" />
+          <Trans i18nKey="directCostInputs" />
         </Box>
         <Flex gap={6} justifyContent={"start"}>
           <CurrencyInput
@@ -91,7 +89,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
           <CurrencyInput
             name="contracterPayments"
             error={!!errors.contracterPayments}
-            label={t("contracterPayments")}
+            label={t("contractorPayments")}
             helperText={t("contractorPaymentsHelperText")}
             control={control}
           />

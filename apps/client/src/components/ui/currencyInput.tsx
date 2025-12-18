@@ -28,12 +28,16 @@ export default function CurrencyInput({
   control,
 }: Props) {
   const [isFocused, setIsFocused] = useState(false);
+  // onChange={(e) => {
+  //                   const parsed = parseCurrency(e.target.value);
+  //                   onChange(parsed ? parseFloat(parsed).toString() : "");
+  //                 }}
   return (
     <Controller
       name={name}
       control={control}
       render={({ field: { onChange, value } }) => {
-        const displayValue = isFocused ? value || "" : currencyFormat(value);
+        const displayValue = isFocused ? value : currencyFormat(value);
         return (
           <Field.Root invalid={error}>
             <Field.Label>{label}</Field.Label>
@@ -49,10 +53,7 @@ export default function CurrencyInput({
                 width={"sm"}
                 mt={2}
                 value={displayValue}
-                onChange={(e) => {
-                  const parsed = parseCurrency(e.target.value);
-                  onChange(parsed ? parseFloat(parsed).toString() : "");
-                }}
+                onChange={(e) => onChange(Number(e.target.value))}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
               />
