@@ -14,7 +14,7 @@ import {
   OperatingExpensesDto,
   operatingExpensesSchema,
 } from "@shared/schemas";
-import { ValuationStep } from "@shared/types";
+import { FteLevels, ValuationStep } from "@shared/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Controller, useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
@@ -35,6 +35,21 @@ const getLevelOptions = (t: (key: string) => string) => {
     { label: t("levels.high"), value: "HIGH" },
   ];
 };
+
+const getFteLevelDescription = (
+  level: FteLevels,
+  t: (key: string) => string,
+) => {
+  switch (level) {
+    case FteLevels.LOW:
+      return t("fteLowDescription");
+    case FteLevels.MEDIUM:
+      return t("fteMediumDescription");
+    case FteLevels.HIGH:
+      return t("fteHighDescription");
+  }
+};
+
 export default function RevenueDetails({ onSubmitHandler }: Props) {
   const params = useParams();
   const { t, i18n } = useTranslation();
@@ -43,7 +58,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
     queryKey: [params.id],
     queryFn: () => getValuationProgress(params.id as string),
   });
-  const operatingExpensesDetails = evaluationProgress?.data.find(
+  const operatingExpensesDetails = evaluationProgress?.data?.find(
     (item) => item.step === ValuationStep.OperatingExpenses,
   );
 
@@ -79,10 +94,8 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
     });
   };
 
-  const { contains } = useFilter({ sensitivity: "base" });
   const { collection, filter, set } = useListCollection({
     initialItems: getLevelOptions(t),
-    filter: contains,
   });
   useEffect(() => {
     const newItems = getLevelOptions(t);
@@ -172,7 +185,9 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
                       <Combobox.Trigger />
                     </Combobox.IndicatorGroup>
                   </Combobox.Control>
-
+                  <Field.HelperText>
+                    {getFteLevelDescription(field.value as FteLevels, t)}
+                  </Field.HelperText>
                   <Portal>
                     <Combobox.Positioner>
                       <Combobox.Content>

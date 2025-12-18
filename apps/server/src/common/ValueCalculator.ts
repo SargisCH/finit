@@ -6,7 +6,6 @@ import {
 } from '@shared/schemas';
 import { FteLevels } from '@shared/types';
 import Big from 'big.js';
-import { Valuation } from 'src/model/valuation.entity';
 
 export default class ValueCalculator {
   private getPMultiple(ebidtapercentage: Big): number {

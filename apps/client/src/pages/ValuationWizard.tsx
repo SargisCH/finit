@@ -19,7 +19,6 @@ const steps = {
 };
 
 function getWizardComponent(step: ValuationStep, onSubmitHandler: () => void) {
-  console.log("get step", step);
   switch (step) {
     case ValuationStep.CompanyDetails:
       return <CompanyDetails onSubmitHandler={onSubmitHandler} />;
@@ -46,7 +45,6 @@ export default function ValuationWizard() {
 
   const currentStep = steps[params.step as ValuationStep];
   useEffect(() => {
-    console.log("effect", evaluationProgress);
     if (!evaluationProgress?.id) return;
     if (!evaluationProgress?.data.find((item) => item.step === params.step)) {
       navigate(

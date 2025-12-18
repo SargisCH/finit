@@ -99,7 +99,7 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
           <Controller
             name="numberOfEmployees"
             control={control}
-            render={({ field: { onChange } }) => {
+            render={({ field: { onChange, value } }) => {
               return (
                 <Field.Root invalid={!!errors.numberOfEmployees}>
                   <Field.Label>{t("numberOfEmployees")}</Field.Label>
@@ -107,6 +107,7 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
                     max={Number.MAX_SAFE_INTEGER}
                     min={Number.MIN_SAFE_INTEGER}
                     onValueChange={(details) => onChange(details.valueAsNumber)}
+                    value={String(value)}
                   >
                     <NumberInput.Input mt={2} width={"xs"} />
                   </NumberInput.Root>

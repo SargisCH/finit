@@ -89,7 +89,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
           <Controller
             name="numberOfActiveClients"
             control={control}
-            render={({ field: { onChange } }) => {
+            render={({ field: { onChange, value } }) => {
               return (
                 <Field.Root invalid={!!errors.numberOfActiveClients}>
                   <Field.Label>
@@ -100,6 +100,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
                     onValueChange={(details) => onChange(details.valueAsNumber)}
                     max={Number.MAX_SAFE_INTEGER}
                     min={Number.MIN_SAFE_INTEGER}
+                    value={String(value)}
                   >
                     <NumberInput.Input width={"sm"} mt={2} />
                   </NumberInput.Root>

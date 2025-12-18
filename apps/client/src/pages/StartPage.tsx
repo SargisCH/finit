@@ -1,5 +1,5 @@
 import { Box, Button, Text, VStack } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { startValuation } from "../api/valuation";
@@ -11,13 +11,16 @@ const StartPage: React.FC = () => {
     mutate();
   };
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: startValuation,
     onSuccess: (data) => {
-      console.log("on sucess", data);
+      console.log(" on success");
       navigate(`/valuation-wizard/${data.id}/${data.currentStep}`);
     },
   });
+  useEffect(() => {
+    console.log("mounted");
+  }, []);
 
   return (
     <Box
@@ -48,7 +51,12 @@ const StartPage: React.FC = () => {
           Ready to start evaluating a company? Click the button below to begin
           the valuation process.
         </Text>
-        <Button colorPalette="green" size="lg" onClick={handleStartValuation}>
+        <Button
+          colorPalette="green"
+          size="lg"
+          onClick={handleStartValuation}
+          loading={isPending}
+        >
           Start Company Valuation
         </Button>
       </VStack>
