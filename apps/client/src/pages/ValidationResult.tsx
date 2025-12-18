@@ -1,4 +1,3 @@
-import React from "react";
 import { useParams } from "react-router-dom";
 import { currencyFormat } from "../utils";
 import { useQuery } from "@tanstack/react-query";
@@ -52,7 +51,7 @@ export default function ValidationResult() {
       </Flex>
       <Flex p={2} justifyContent={"space-between"}>
         <Trans i18nKey="calculation.ebidtaPercent" />
-        <span>{Number(data?.ebidtaPercentage)?.toFixed(1)} %</span>
+        <span>{Number(data?.ebidtaPercentage)?.toFixed(0)} %</span>
       </Flex>
       <Flex p={2} justifyContent={"space-between"}>
         <Trans i18nKey="calculation.tax" />
@@ -77,7 +76,7 @@ export default function ValidationResult() {
       </Flex>
       <Flex p={2} justifyContent={"space-between"}>
         <Trans i18nKey="calculation.clientConcentration" />
-        <span>{Number(data?.clientConcentration)?.toFixed(1)} %</span>
+        <span>{Number(data?.clientConcentration)?.toFixed(0)} %</span>
       </Flex>
       <Flex p={2} justifyContent={"space-between"}>
         <Trans i18nKey="calculation.valuation" />

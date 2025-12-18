@@ -14,6 +14,7 @@ const StartPage: React.FC = () => {
   const { mutate } = useMutation({
     mutationFn: startValuation,
     onSuccess: (data) => {
+      console.log("on sucess", data);
       navigate(`/valuation-wizard/${data.id}/${data.currentStep}`);
     },
   });
@@ -28,7 +29,7 @@ const StartPage: React.FC = () => {
       _dark={{ bg: "gray.800" }} // Dark mode background
       p={4}
     >
-      <VStack spacing={8} textAlign="center" maxW="lg">
+      <VStack gap={8} textAlign="center" maxW="lg">
         <Text
           fontSize="4xl"
           fontWeight="bold"

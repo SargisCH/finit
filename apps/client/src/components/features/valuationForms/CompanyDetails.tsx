@@ -12,6 +12,7 @@ import {
   companyDetailsSchema,
   EvaluationProgress,
 } from "@shared/schemas";
+import { ValuationStep } from "@shared/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Trans } from "react-i18next";
@@ -20,7 +21,6 @@ import {
   getValuationProgress,
 } from "../../../api/valuation";
 import { useParams } from "react-router-dom";
-import { ValuationStep } from "../../../../../../packages/types/dist";
 import { useEffect } from "react";
 
 type Props = { onSubmitHandler: () => void };
@@ -56,7 +56,7 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
       evaluateCompanyDetails(id, data),
     onSuccess: onSubmitHandler,
   });
-  const onSubmit = (values: CompanyDetailsDto) => {
+  const onSubmit = (values: Omit<CompanyDetailsDto, "step">) => {
     mutate({
       id: params.id as string,
       data: { ...values, step: ValuationStep.CompanyDetails },

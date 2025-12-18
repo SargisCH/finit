@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
 import ValuationWizard from "./pages/ValuationWizard";
 import StartPage from "./pages/StartPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

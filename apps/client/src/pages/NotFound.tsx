@@ -1,9 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const containerStyle = {
   display: "flex",
-  flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
   height: "100vh", // Takes up the full height of the viewport
@@ -39,7 +37,7 @@ const linkStyle = {
 
 export default function NotFound() {
   return (
-    <div style={containerStyle}>
+    <div style={{ ...containerStyle, flexDirection: "column" }}>
       <h1 style={headingStyle}>404</h1>
       <h2 style={messageStyle}>Page Not Found</h2>
       <p style={{ fontSize: "18px", marginBottom: "30px" }}>

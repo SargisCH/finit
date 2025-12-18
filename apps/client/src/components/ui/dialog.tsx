@@ -1,7 +1,6 @@
-import { Box, Button, Dialog, Flex } from "@chakra-ui/react";
+import { Button, Dialog, Flex } from "@chakra-ui/react";
 import { CompanyEvaluationResponse } from "@shared/schemas";
 import { Trans } from "react-i18next";
-import { currencyFormat } from "../../utils";
 
 type Props = {
   open: boolean;
@@ -9,7 +8,7 @@ type Props = {
   data: CompanyEvaluationResponse | undefined;
 };
 
-export default function DialogCustom({ open, onClose, data }: Props) {
+export default function DialogCustom({ open, onClose }: Props) {
   return (
     <Dialog.Root open={open}>
       <Dialog.Trigger />

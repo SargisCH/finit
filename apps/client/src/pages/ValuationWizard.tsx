@@ -19,6 +19,7 @@ const steps = {
 };
 
 function getWizardComponent(step: ValuationStep, onSubmitHandler: () => void) {
+  console.log("get step", step);
   switch (step) {
     case ValuationStep.CompanyDetails:
       return <CompanyDetails onSubmitHandler={onSubmitHandler} />;
@@ -45,14 +46,17 @@ export default function ValuationWizard() {
 
   const currentStep = steps[params.step as ValuationStep];
   useEffect(() => {
+    console.log("effect", evaluationProgress);
+    if (!evaluationProgress?.id) return;
     if (!evaluationProgress?.data.find((item) => item.step === params.step)) {
       navigate(
         `/valuation-wizard/${evaluationProgress?.id}/${evaluationProgress?.currentStep}`,
       );
     }
-  }, [evaluationProgress?.data]);
+  }, [evaluationProgress]);
   const totalSteps = Object.keys(steps).length;
   const nextHandler = useCallback(() => {
+    console.log("next handler", params.step);
     switch (params.step) {
       case ValuationStep.CompanyDetails:
         navigate(

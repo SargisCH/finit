@@ -7,7 +7,6 @@ import { initReactI18next } from "react-i18next";
 import detector from "i18next-browser-languagedetector";
 import en from "./locales/en.json";
 import am from "./locales/am.json";
-import MainLayout from "./layouts/MainLayout.tsx";
 
 i18next
   .use(detector)

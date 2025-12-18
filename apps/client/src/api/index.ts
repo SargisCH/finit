@@ -10,10 +10,7 @@ const responseHandler = async (response: Response) => {
   return response.json();
 };
 
-export const get = async <T>(
-  endpoint: string,
-  queryParams?: Record<string | number, string | number>,
-): Promise<T> => {
+export const get = async <T>(endpoint: string): Promise<T> => {
   return fetch(`${baseUrl}/${endpoint}`).then(responseHandler);
 };
 export const post = async <T extends Object, R extends Object>(

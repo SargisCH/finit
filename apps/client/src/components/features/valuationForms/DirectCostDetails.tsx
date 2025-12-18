@@ -5,6 +5,7 @@ import {
   directCostSchema,
   DirectCostDto,
 } from "@shared/schemas";
+import { ValuationStep } from "@shared/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { Trans, useTranslation } from "react-i18next";
@@ -13,7 +14,6 @@ import {
   getValuationProgress,
 } from "../../../api/valuation";
 import { useParams } from "react-router-dom";
-import { ValuationStep } from "../../../../../../packages/types/dist";
 import { useEffect } from "react";
 import CurrencyInput from "../../ui/currencyInput";
 
