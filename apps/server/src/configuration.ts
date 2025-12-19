@@ -57,9 +57,11 @@ class ConfigService {
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: false,
       migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
-      ssl: {
-        rejectUnauthorized: false, // Required for most hosted DBs unless you provide a CA certificate
-      },
+      ssl: this.isProduction()
+        ? {
+            rejectUnauthorized: false, // Required for most hosted DBs unless you provide a CA certificate
+          }
+        : false,
     };
   }
 }
