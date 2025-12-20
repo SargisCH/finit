@@ -17,9 +17,9 @@ const FORMAT_OPTIONS: Intl.NumberFormatOptions = {
   currency: "AMD",
   currencyDisplay: "code",
 };
-const parseCurrency = (val: string) => {
-  return val.replace(/[^0-9.-]/g, "");
-};
+// const parseCurrency = (val: string) => {
+//   return val.replace(/[^0-9.-]/g, "");
+// };
 export default function CurrencyInput({
   error,
   label,

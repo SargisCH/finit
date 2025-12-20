@@ -1,9 +1,13 @@
-!#/bin/bash
+#!/usr/bin/bash
 
-pnpm run --filter server deploy server_build
-cd server_build
+pnpm --filter server deploy server_build
+pnpm --filter client build
+cd apps/client
+tar -czvf client-dist.tar.gz dist
+cd ../../server_build
 pnpm build
-tar -czvf /home/sargis/projects/finit/builds/backend/dist.tar.gz dist
-tar -czvf /home/sargis/projects/finit/builds/backend/server_modules.tar.gz node_modules
-scp -r server.tar.gz root@185-47-174-99.cloud-xip.com:~/finit-backend
-scp -r server-modules.tar.gz root@185-47-174-99.cloud-xip.com:~/finit-backend
+tar -czvf /home/sargis/projects/finit/server_build/dist.tar.gz dist
+tar -czvf /home/sargis/projects/finit/server_build/server_modules.tar.gz node_modules
+scp -i ~/.ssh/id_ed25519_personal -r  /home/sargis/projects/finit/server_build/dist.tar.gz root@185-47-174-99.cloud-xip.com:~/finit-backend
+scp  -i ~/.ssh/id_ed25519_personal -r  /home/sargis/projects/finit/server_build/server_modules.tar.gz root@185-47-174-99.cloud-xip.com:~/finit-backend
+scp  -i ~/.ssh/id_ed25519_personal -r  /home/sargis/projects/finit/apps/client/client-dist.tar.gz root@185-47-174-99.cloud-xip.com:~/finit-frontend
