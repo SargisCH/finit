@@ -9,7 +9,7 @@ import CompanyDetails from "../components/features/valuationForms/CompanyDetails
 import RevenueDetails from "../components/features/valuationForms/RevenueDetails";
 import DirectCostDetails from "../components/features/valuationForms/DirectCostDetails";
 import OperatingExpensesDetails from "../components/features/valuationForms/OperatingExpensesDetails";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Spinner } from "@chakra-ui/react";
 
 const steps = {
   [ValuationStep.CompanyDetails]: 1,
@@ -34,8 +34,8 @@ function getWizardComponent(step: ValuationStep, onSubmitHandler: () => void) {
 export default function ValuationWizard() {
   const navigate = useNavigate();
   const params = useParams();
-  const { data: evaluationProgress } = useQuery<EvaluationProgress>({
-    queryKey: [params.id],
+  const { data: evaluationProgress, isLoading } = useQuery<EvaluationProgress>({
+    queryKey: [params.id, params.step],
     queryFn: () => {
       return !params.id
         ? ({} as EvaluationProgress)
@@ -105,7 +105,13 @@ export default function ValuationWizard() {
         totalSteps={totalSteps}
         previousHandler={previousHandler}
       >
-        {getWizardComponent(params.step as ValuationStep, nextHandler)}
+        {isLoading ? (
+          <Flex justifyContent={"center"}>
+            <Spinner size="xl" />
+          </Flex>
+        ) : (
+          getWizardComponent(params.step as ValuationStep, nextHandler)
+        )}
       </Wizard>
     </Box>
   );

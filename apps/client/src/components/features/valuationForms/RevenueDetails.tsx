@@ -47,7 +47,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
       revenuePerClient: revenueDetails?.revenuePerClient ?? 0,
     });
   }, [revenueDetails, reset]);
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: ({ id, data }: { id: string; data: RevenueDetailsDto }) =>
       evaluateRevenueDetails(id, data),
     onSuccess: onSubmitHandler,
@@ -123,7 +123,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
         </Flex>
       </Flex>
       <Flex justifyContent="end" mt={10}>
-        <Button colorPalette="natureDark" type="submit">
+        <Button colorPalette="natureDark" type="submit" loading={isPending}>
           {t("next")}
         </Button>
       </Flex>

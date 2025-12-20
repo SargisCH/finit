@@ -28,7 +28,6 @@ export class CompanyEvaluationWipController {
       | DirectCostDto
       | OperatingExpensesDto,
   ): Promise<ValuationWip | null> {
-    console.log('id', id, stepDetails);
     return this.companyEvaluationWipService.saveStepDetails(id, stepDetails);
   }
 

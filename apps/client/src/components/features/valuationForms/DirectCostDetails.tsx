@@ -48,7 +48,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
       softwareLicenses: directCostDetails?.softwareLicenses ?? 0,
     });
   }, [directCostDetails, reset]);
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: ({ id, data }: { id: string; data: DirectCostDto }) =>
       evaluateDirectCostDetails(id, data),
     onSuccess: onSubmitHandler,
@@ -112,7 +112,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
         </Flex>
       </Flex>
       <Flex justifyContent="end" mt={10}>
-        <Button colorPalette="natureDark" type="submit">
+        <Button colorPalette="natureDark" type="submit" loading={isPending}>
           {t("next")}
         </Button>
       </Flex>

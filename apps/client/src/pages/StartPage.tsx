@@ -48,7 +48,7 @@ const StartPage: React.FC = () => {
           the valuation process.
         </Text>
         <Button
-          colorPalette="green"
+          colorPalette="natureDark"
           size="lg"
           onClick={handleStartValuation}
           loading={isPending}

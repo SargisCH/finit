@@ -5,7 +5,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { configService } from '../configuration';
 import { CompanyEvaluationModule } from './companyEvaluation/companyEvaluation.module';
 import { CompanyEvaluationWipModule } from './companyEvaluationWip/companyEvaluationWip.module';
-console.log('asdas', configService.getTypeOrmConfig());
 @Module({
   imports: [
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),

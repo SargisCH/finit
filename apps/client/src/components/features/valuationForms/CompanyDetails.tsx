@@ -53,7 +53,7 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
       numberOfEmployees: companyDetails?.numberOfEmployees,
     });
   }, [companyDetails, reset]);
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: ({ id, data }: { id: string; data: CompanyDetailsDto }) =>
       evaluateCompanyDetails(id, data),
     onSuccess: onSubmitHandler,
@@ -119,7 +119,7 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
         </Flex>
       </Flex>
       <Flex justifyContent="end" mt={10}>
-        <Button colorPalette={"natureDark"} type="submit">
+        <Button colorPalette={"natureDark"} type="submit" loading={isPending}>
           {t("next")}
         </Button>
       </Flex>

@@ -7,11 +7,11 @@ import { Box, Flex, Spinner } from "@chakra-ui/react";
 
 export default function ValidationResult() {
   const params = useParams();
-  const { data, isPending } = useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: [params.id],
     queryFn: () => getValuationResult(params?.id ?? ""),
   });
-  if (isPending)
+  if (isFetching)
     return (
       <Flex minH={"100vh"} justifyContent="center" alignItems="center">
         <Spinner size="xl" />
