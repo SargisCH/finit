@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 rm -rf server_build
+rm -rf apps/client/dist
 pnpm --filter server deploy server_build
 pnpm --filter client build
 cd apps/client

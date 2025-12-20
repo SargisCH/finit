@@ -212,7 +212,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
       </Flex>
 
       <Flex justifyContent="end" mt={10}>
-        <Button colorPalette="green" type="submit">
+        <Button colorPalette="natureDark" type="submit">
           {t("next")}
         </Button>
       </Flex>

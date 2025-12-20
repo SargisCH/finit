@@ -1,6 +1,4 @@
 import { Box, Flex, Menu, Portal, Image, Span } from "@chakra-ui/react";
-import usFlag from "../assets/united-states-svgrepo-com.svg";
-import armFlag from "../assets/armenia-svgrepo-com.svg";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
