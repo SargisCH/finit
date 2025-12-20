@@ -23,6 +23,9 @@ class ConfigService {
   public getPort() {
     return this.getValue('PORT', true);
   }
+  public getAppUrl() {
+    return this.getValue('APP_URL', true);
+  }
 
   public isProduction() {
     const mode = this.getValue('MODE', false);
@@ -72,6 +75,8 @@ const configService = new ConfigService(process.env).ensureValues([
   'POSTGRES_USER',
   'POSTGRES_PASSWORD',
   'POSTGRES_DATABASE',
+  'PORT',
+  'APP_URL',
 ]);
 
 export { configService };

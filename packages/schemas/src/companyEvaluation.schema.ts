@@ -20,7 +20,7 @@ export const companyEvaluateSchema = z
     adminSalaries: z.number().optional().default(0),
     marketing: z.number().optional().default(0),
     otherOperatingExpenses: z.number().optional().default(0),
-    fteRiskLevel: z.string().optional(),
+    fteRiskLevel: z.string(),
   })
   .required();
 
@@ -52,7 +52,7 @@ export const operatingExpensesSchema = z.object({
   adminSalaries: z.number().optional().default(0),
   marketing: z.number().optional().default(0),
   otherOperatingExpenses: z.number().optional().default(0),
-  fteRiskLevel: z.string().optional(),
+  fteRiskLevel: z.string(),
   step: ValuationStep.OperatingExpenses,
 });
 

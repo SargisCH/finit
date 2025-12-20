@@ -1,6 +1,5 @@
 import { Box, Button, Flex, Link, Span } from "@chakra-ui/react";
 import { LuChevronLeft } from "react-icons/lu";
-import { useNavigate } from "react-router-dom";
 import Progress from "./Progress";
 import { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,6 +8,7 @@ type Props = {
   currentStep: number;
   totalSteps: number;
   children: ReactNode;
+  previousHandler?: () => void;
   nextButtonProps?:
     | {
         type: "submit";
@@ -44,13 +44,13 @@ export default function Wizard({
   totalSteps,
   children,
   nextButtonProps,
+  previousHandler,
 }: Props) {
-  const navigate = useNavigate();
   const { t } = useTranslation();
   return (
     <Box py={12} px={6} direction="column" width="60%" mx="auto">
       <Flex justifyContent="space-between" mb={2}>
-        <Link onClick={() => navigate("/")}>
+        <Link onClick={previousHandler}>
           <LuChevronLeft />
           <Span>{t("back")}</Span>
         </Link>

@@ -1,5 +1,5 @@
 import { Box, Button, Text, VStack } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { startValuation } from "../api/valuation";
@@ -14,13 +14,9 @@ const StartPage: React.FC = () => {
   const { mutate, isPending } = useMutation({
     mutationFn: startValuation,
     onSuccess: (data) => {
-      console.log(" on success");
       navigate(`/valuation-wizard/${data.id}/${data.currentStep}`);
     },
   });
-  useEffect(() => {
-    console.log("mounted");
-  }, []);
 
   return (
     <Box

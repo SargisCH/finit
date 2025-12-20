@@ -64,5 +64,7 @@
   },
   "fteLowDescription": "No single employee brings in >15% of revenue. There are mid-level replacements",
   "fteMediumDescription": "The top 3 employees generate 40–50% of revenue. There are 1–2 senior employees who are indispensable to clients.",
-  "fteHighDescription": "One senior brings in 30-50% of revenue. The client works with them specifically. Their departure = loss of a client"
+  "fteHighDescription": "One senior brings in 30-50% of revenue. The client works with them specifically. Their departure = loss of a client",
+  "en": "Eng",
+  "am": "Հայ"
 }

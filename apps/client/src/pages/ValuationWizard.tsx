@@ -49,12 +49,12 @@ export default function ValuationWizard() {
     if (!evaluationProgress?.data.find((item) => item.step === params.step)) {
       navigate(
         `/valuation-wizard/${evaluationProgress?.id}/${evaluationProgress?.currentStep}`,
+        { replace: true },
       );
     }
-  }, [evaluationProgress]);
+  }, [evaluationProgress, params.step]);
   const totalSteps = Object.keys(steps).length;
   const nextHandler = useCallback(() => {
-    console.log("next handler", params.step);
     switch (params.step) {
       case ValuationStep.CompanyDetails:
         navigate(
@@ -76,9 +76,35 @@ export default function ValuationWizard() {
         return;
     }
   }, [currentStep]);
+  const previousHandler = useCallback(() => {
+    switch (params.step) {
+      case ValuationStep.CompanyDetails:
+        navigate(`/`);
+        return;
+      case ValuationStep.RevenueDetails:
+        navigate(
+          `/valuation-wizard/${params.id}/${ValuationStep.CompanyDetails}`,
+        );
+        return;
+      case ValuationStep.DirectConstDetails:
+        navigate(
+          `/valuation-wizard/${params.id}/${ValuationStep.RevenueDetails}`,
+        );
+        return;
+      case ValuationStep.OperatingExpenses:
+        navigate(
+          `/valuation-wizard/${params.id}/${ValuationStep.DirectConstDetails}`,
+        );
+        return;
+    }
+  }, [currentStep]);
   return (
     <Box minH="100vh">
-      <Wizard currentStep={currentStep} totalSteps={totalSteps}>
+      <Wizard
+        currentStep={currentStep}
+        totalSteps={totalSteps}
+        previousHandler={previousHandler}
+      >
         {getWizardComponent(params.step as ValuationStep, nextHandler)}
       </Wizard>
     </Box>

@@ -119,7 +119,7 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
         </Flex>
       </Flex>
       <Flex justifyContent="end" mt={10}>
-        <Button colorPalette="green" type="submit">
+        <Button colorPalette={"natureDark"} type="submit">
           {t("next")}
         </Button>
       </Flex>

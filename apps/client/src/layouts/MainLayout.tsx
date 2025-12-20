@@ -1,12 +1,12 @@
-import { Box, Flex, Menu, Portal, Image } from "@chakra-ui/react";
+import { Box, Flex, Menu, Portal, Image, Span } from "@chakra-ui/react";
 import usFlag from "../assets/united-states-svgrepo-com.svg";
 import armFlag from "../assets/armenia-svgrepo-com.svg";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 const icons = {
-  en: usFlag,
-  am: armFlag,
+  en: "en",
+  am: "am",
 };
 
 type Props = {};
@@ -19,6 +19,8 @@ const MainLayout: React.FC<React.PropsWithChildren<Props>> = ({ children }) => {
   const handleLanguageChange = (lng: string) => {
     i18n.changeLanguage(lng);
   };
+  const imgUrl = new URL("/logo.png", import.meta.url).href;
+  const { t } = useTranslation();
   return (
     <Box>
       <Flex
@@ -26,13 +28,23 @@ const MainLayout: React.FC<React.PropsWithChildren<Props>> = ({ children }) => {
         px={10}
         py={5}
         justifyContent={"space-between"}
+        boxSizing={"border-box"}
         borderBottomColor={"lightgray"}
         borderBottomWidth={"1px"}
+        alignItems="center"
       >
-        <img src="" alt={"logo image"} onClick={() => navigate("/")} />
+        <Image
+          src={imgUrl}
+          alt={"logo image"}
+          height={10}
+          onClick={() => navigate("/")}
+          cursor={"pointer"}
+        />
         <Menu.Root>
           <Menu.Trigger asChild>
-            <Image src={icons[selectedLanguage]} width={"6"} />
+            <Span color="white" textDecoration={"underline"} cursor={"pointer"}>
+              {t(selectedLanguage)}
+            </Span>
           </Menu.Trigger>
           <Portal>
             <Menu.Positioner>
@@ -42,14 +54,14 @@ const MainLayout: React.FC<React.PropsWithChildren<Props>> = ({ children }) => {
                   justifyContent={"center"}
                   onClick={() => handleLanguageChange("en")}
                 >
-                  <Image src={usFlag} width={"6"} />
+                  {t("en")}
                 </Menu.Item>
                 <Menu.Item
                   value="am"
                   justifyContent={"center"}
                   onClick={() => handleLanguageChange("am")}
                 >
-                  <Image src={armFlag} width={"6"} />
+                  {t("am")}
                 </Menu.Item>
               </Menu.Content>
             </Menu.Positioner>
