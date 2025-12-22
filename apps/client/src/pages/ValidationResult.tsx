@@ -21,8 +21,9 @@ export default function ValidationResult() {
     <Box px={28} py={20} minH="100vh">
       <Flex
         p={2}
-        backgroundColor={"forestGreen"}
+        backgroundColor={"natureDark.fg"}
         justifyContent={"space-between"}
+        color="white"
       >
         <Trans i18nKey="calculation.annualRevenue" />
         <span>{currencyFormat(data?.annualRevenue ?? 0, true)}</span>
@@ -37,7 +38,8 @@ export default function ValidationResult() {
       </Flex>
       <Flex
         p={2}
-        backgroundColor={"forestGreen"}
+        backgroundColor={"natureDark.fg"}
+        color="white"
         justifyContent={"space-between"}
       >
         <Trans i18nKey="calculation.grossProfit" />
@@ -50,7 +52,8 @@ export default function ValidationResult() {
       <Flex
         p={2}
         justifyContent={"space-between"}
-        backgroundColor={"forestGreen"}
+        backgroundColor={"natureDark.fg"}
+        color="white"
       >
         <Trans i18nKey="calculation.ebidta" />
         <span>{currencyFormat(data?.ebidta ?? 0, true)}</span>
@@ -66,7 +69,8 @@ export default function ValidationResult() {
       <Flex
         mt={4}
         p={2}
-        backgroundColor={"forestGreen"}
+        backgroundColor={"natureDark.fg"}
+        color="white"
         justifyContent={"space-between"}
       >
         <Trans i18nKey="calculation.netProfit" />

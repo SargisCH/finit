@@ -43,7 +43,11 @@ export function useColorModeValue<T>(light: T, dark: T) {
 
 export function ColorModeIcon() {
   const { colorMode } = useColorMode();
-  return colorMode === "dark" ? <LuMoon /> : <LuSun />;
+  return colorMode === "dark" ? (
+    <LuMoon color="gray.700" />
+  ) : (
+    <LuSun color="gray.700" />
+  );
 }
 
 interface ColorModeButtonProps extends Omit<IconButtonProps, "aria-label"> {}

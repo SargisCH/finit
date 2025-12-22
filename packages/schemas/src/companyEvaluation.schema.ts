@@ -52,7 +52,7 @@ export const operatingExpensesSchema = z.object({
   adminSalaries: z.number().optional().default(0),
   marketing: z.number().optional().default(0),
   otherOperatingExpenses: z.number().optional().default(0),
-  fteRiskLevel: z.string(),
+  fteRiskLevel: z.string().min(1, "Field cannot be empty."),
   step: ValuationStep.OperatingExpenses,
 });
 

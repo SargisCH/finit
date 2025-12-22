@@ -79,15 +79,19 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
         <Flex gap={6} justifyContent={"start"}>
           <Field.Root invalid={!!errors.name}>
             <Field.Label>{t("companyName")}</Field.Label>
-            <Field.HelperText>{t("nameOfYourCompany")}</Field.HelperText>
-            <Input placeholder="name" mt={2} {...register("name")} width="xs" />
+            <Input
+              placeholder={t("companyName")}
+              mt={2}
+              {...register("name")}
+              width="xs"
+            />
             <Field.ErrorText>{t("errors.requiredField")}</Field.ErrorText>
           </Field.Root>
           <Field.Root invalid={!!errors.industry}>
             <Field.Label>{t("industry")}</Field.Label>
             <Field.HelperText>{t("typeOfItService")}</Field.HelperText>
             <Input
-              placeholder="industry"
+              placeholder={t("typeOfItService")}
               mt={2}
               {...register("industry")}
               width={"xs"}
@@ -109,7 +113,11 @@ export default function CompanyDetails({ onSubmitHandler }: Props) {
                     onValueChange={(details) => onChange(details.valueAsNumber)}
                     value={String(value)}
                   >
-                    <NumberInput.Input mt={2} width={"xs"} />
+                    <NumberInput.Input
+                      mt={2}
+                      width={"xs"}
+                      placeholder={t("numberOfEmployees")}
+                    />
                   </NumberInput.Root>
                   <Field.ErrorText>{t("errors.requiredField")}</Field.ErrorText>
                 </Field.Root>

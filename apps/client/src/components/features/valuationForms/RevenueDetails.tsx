@@ -76,6 +76,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             label={t("monthlyRevenue")}
             helperText={t("monthlyRevenueHelperText")}
             control={control}
+            placeholder={t("monthlyRevenue")}
           />
           <CurrencyInput
             name="mrr"
@@ -83,6 +84,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             label={t("mrr")}
             helperText={t("mrrHelperText")}
             control={control}
+            placeholder={t("mrr")}
           />
         </Flex>
         <Flex gap={6} justifyContent={"start"}>
@@ -102,7 +104,11 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
                     min={Number.MIN_SAFE_INTEGER}
                     value={String(value)}
                   >
-                    <NumberInput.Input width={"sm"} mt={2} />
+                    <NumberInput.Input
+                      width={"sm"}
+                      mt={2}
+                      placeholder={t("numberOfActiveClients")}
+                    />
                   </NumberInput.Root>
 
                   <Field.ErrorText>
@@ -119,6 +125,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             label={t("revenuePerClient")}
             helperText={t("revenuePerClientHelperText")}
             control={control}
+            placeholder={t("revenuePerClient")}
           />
         </Flex>
       </Flex>

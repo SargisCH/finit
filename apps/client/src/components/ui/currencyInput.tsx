@@ -10,6 +10,7 @@ type Props = {
   helperText?: string;
   name: string;
   control: any;
+  placeholder?: string;
 };
 
 const FORMAT_OPTIONS: Intl.NumberFormatOptions = {
@@ -26,6 +27,7 @@ export default function CurrencyInput({
   helperText,
   name,
   control,
+  placeholder,
 }: Props) {
   const [isFocused, setIsFocused] = useState(false);
   // onChange={(e) => {
@@ -56,6 +58,7 @@ export default function CurrencyInput({
                 onChange={(e) => onChange(Number(e.target.value))}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}
+                placeholder={placeholder}
               />
             </NumberInput.Root>
             <Field.ErrorText>

@@ -1,5 +1,66 @@
-import { createSystem, defaultConfig } from "@chakra-ui/react";
+import {
+  createSystem,
+  defaultConfig,
+  defineSlotRecipe,
+} from "@chakra-ui/react";
 
+const numberInputRecipe = defineSlotRecipe({
+  slots: ["input", "control"],
+  base: {
+    input: {
+      borderColor: "gray.300",
+      _dark: {
+        borderColor: "gray.600",
+        _focus: {
+          borderColor: "blue.400",
+          focusRing: "2px",
+          focusRingColor: "blue.400",
+        },
+      },
+    },
+    control: {
+      _dark: {
+        borderColor: "gray.600",
+      },
+    },
+  },
+});
+
+const comboboxRecipe = defineSlotRecipe({
+  className: "chakra-combobox",
+  slots: ["root", "input", "control", "trigger", "content", "item"],
+  base: {
+    input: {
+      borderColor: "gray.300",
+      _dark: {
+        borderColor: "gray.600",
+        _focus: {
+          borderColor: "blue.400",
+          focusRing: "2px",
+          focusRingColor: "blue.400",
+        },
+      },
+    },
+    content: {
+      bg: "gray.100",
+      _dark: {
+        bg: "gray.700",
+      },
+    },
+  },
+});
+const menuRecipe = defineSlotRecipe({
+  className: "chakra-menu",
+  slots: ["root", "trigger", "content", "item"],
+  base: {
+    content: {
+      bg: "gray.100",
+      _dark: {
+        bg: "gray.700",
+      },
+    },
+  },
+});
 export const system = createSystem(defaultConfig, {
   theme: {
     tokens: {
@@ -42,6 +103,26 @@ export const system = createSystem(defaultConfig, {
           focusRing: { value: "{colors.natureDark.500}" },
         },
       },
+    },
+    recipes: {
+      input: {
+        base: {
+          borderColor: "gray.300",
+          _dark: {
+            borderColor: "gray.700",
+            _focus: {
+              borderColor: "blue.400",
+              focusRing: "2px",
+              focusRingColor: "blue.400",
+            },
+          },
+        },
+      },
+    },
+    slotRecipes: {
+      numberInput: numberInputRecipe,
+      combobox: comboboxRecipe,
+      menu: menuRecipe,
     },
   },
 });

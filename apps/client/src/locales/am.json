@@ -20,7 +20,7 @@
   "developerSalaries": "Ծրագրավողների ամսական աշխատավարձ",
   "developerSalariesHelperText": "Բոլոր աշխատողների ընդհանուր համախառն աշխատավարձը (հարկերը ներառյալ)",
   "topSalaries": "1-2 բարձր վարձատրվող ծրագրավողի աշխատավարձ",
-  "contractorPayments": "պայմանագրային/ֆրիլանսերների վճարումներ",
+  "contractorPayments": "Պայմանագրային/ֆրիլանսերների վճարումներ",
   "contractorPaymentsHelperText": "Պայմանագրային աշխատողների միջին ամսական վճարումների գումարը",
   "softwareLicenses": "Արտոնագրեր",
   "softwareLicensesHelperText": "GitHub, Jira, Figma, AWS",
