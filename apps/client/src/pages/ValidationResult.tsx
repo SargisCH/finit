@@ -18,79 +18,85 @@ export default function ValidationResult() {
       </Flex>
     );
   return (
-    <Box px={28} py={20} minH="100vh">
-      <Flex
-        p={2}
-        backgroundColor={"natureDark.fg"}
-        justifyContent={"space-between"}
-        color="white"
-      >
-        <Trans i18nKey="calculation.annualRevenue" />
-        <span>{currencyFormat(data?.annualRevenue ?? 0, true)}</span>
-      </Flex>
-      <Flex p={2} justifyContent={"space-between"}>
-        <Trans i18nKey="calculation.developerSalaries" />
-        <span>{currencyFormat(data?.developerSalaries ?? 0, true)}</span>
-      </Flex>
-      <Flex p={2} justifyContent={"space-between"}>
-        <Trans i18nKey="calculation.otherDirectCost" />
-        <span>{currencyFormat(data?.otherDirectCost ?? 0, true)}</span>
-      </Flex>
-      <Flex
-        p={2}
-        backgroundColor={"natureDark.fg"}
-        color="white"
-        justifyContent={"space-between"}
-      >
-        <Trans i18nKey="calculation.grossProfit" />
-        <span>{currencyFormat(data?.grossProfit ?? 0, true)}</span>
-      </Flex>
-      <Flex p={2} justifyContent={"space-between"}>
-        <Trans i18nKey="calculation.operatingExpenses" />
-        <span>{currencyFormat(data?.operatingExpenses ?? 0, true)}</span>
-      </Flex>
-      <Flex
-        p={2}
-        justifyContent={"space-between"}
-        backgroundColor={"natureDark.fg"}
-        color="white"
-      >
-        <Trans i18nKey="calculation.ebidta" />
-        <span>{currencyFormat(data?.ebidta ?? 0, true)}</span>
-      </Flex>
-      <Flex p={2} justifyContent={"space-between"}>
-        <Trans i18nKey="calculation.ebidtaPercent" />
-        <span>{Number(data?.ebidtaPercentage)?.toFixed(0)} %</span>
-      </Flex>
-      <Flex p={2} justifyContent={"space-between"}>
-        <Trans i18nKey="calculation.tax" />
-        <span>{currencyFormat(data?.tax ?? 0, true)}</span>
-      </Flex>
-      <Flex
-        mt={4}
-        p={2}
-        backgroundColor={"natureDark.fg"}
-        color="white"
-        justifyContent={"space-between"}
-      >
-        <Trans i18nKey="calculation.netProfit" />
-        <span>{currencyFormat(data?.netProfit ?? 0, true)}</span>
-      </Flex>
-      <Flex p={2} justifyContent={"space-between"}>
-        <Trans i18nKey="calculation.profitMargin" />
-        <span>{currencyFormat(data?.profitMarginPercentage ?? 0, true)}</span>
-      </Flex>
-      <Flex p={2} justifyContent={"space-between"}>
-        <Trans i18nKey="calculation.mrr" />
-        <span>{Number(data?.mrr)?.toFixed(0)} %</span>
-      </Flex>
-      <Flex p={2} justifyContent={"space-between"}>
-        <Trans i18nKey="calculation.clientConcentration" />
-        <span>{Number(data?.clientConcentration)?.toFixed(0)} %</span>
-      </Flex>
-      <Flex p={2} justifyContent={"space-between"}>
-        <Trans i18nKey="calculation.valuation" />
-        <span>{currencyFormat(data?.valuation ?? 0, true)}</span>
+    <Box w="full" px={22} py={20} minH="100vh">
+      <Flex justifyContent="center">
+        <Box width="3xl">
+          <Flex
+            p={2}
+            backgroundColor={"natureDark.fg"}
+            justifyContent={"space-between"}
+            color="white"
+          >
+            <Trans i18nKey="calculation.annualRevenue" />
+            <span>{currencyFormat(data?.annualRevenue ?? 0, true)}</span>
+          </Flex>
+          <Flex p={2} justifyContent={"space-between"}>
+            <Trans i18nKey="calculation.developerSalaries" />
+            <span>{currencyFormat(data?.developerSalaries ?? 0, true)}</span>
+          </Flex>
+          <Flex p={2} justifyContent={"space-between"}>
+            <Trans i18nKey="calculation.otherDirectCost" />
+            <span>{currencyFormat(data?.otherDirectCost ?? 0, true)}</span>
+          </Flex>
+          <Flex
+            p={2}
+            backgroundColor={"natureDark.fg"}
+            color="white"
+            justifyContent={"space-between"}
+          >
+            <Trans i18nKey="calculation.grossProfit" />
+            <span>{currencyFormat(data?.grossProfit ?? 0, true)}</span>
+          </Flex>
+          <Flex p={2} justifyContent={"space-between"}>
+            <Trans i18nKey="calculation.operatingExpenses" />
+            <span>{currencyFormat(data?.operatingExpenses ?? 0, true)}</span>
+          </Flex>
+          <Flex
+            p={2}
+            justifyContent={"space-between"}
+            backgroundColor={"natureDark.fg"}
+            color="white"
+          >
+            <Trans i18nKey="calculation.ebidta" />
+            <span>{currencyFormat(data?.ebidta ?? 0, true)}</span>
+          </Flex>
+          <Flex p={2} justifyContent={"space-between"}>
+            <Trans i18nKey="calculation.ebidtaPercent" />
+            <span>{Number(data?.ebidtaPercentage)?.toFixed(0)} %</span>
+          </Flex>
+          <Flex p={2} justifyContent={"space-between"}>
+            <Trans i18nKey="calculation.tax" />
+            <span>{currencyFormat(data?.tax ?? 0, true)}</span>
+          </Flex>
+          <Flex
+            mt={4}
+            p={2}
+            backgroundColor={"natureDark.fg"}
+            color="white"
+            justifyContent={"space-between"}
+          >
+            <Trans i18nKey="calculation.netProfit" />
+            <span>{currencyFormat(data?.netProfit ?? 0, true)}</span>
+          </Flex>
+          <Flex p={2} justifyContent={"space-between"}>
+            <Trans i18nKey="calculation.profitMargin" />
+            <span>
+              {currencyFormat(data?.profitMarginPercentage ?? 0, true)}
+            </span>
+          </Flex>
+          <Flex p={2} justifyContent={"space-between"}>
+            <Trans i18nKey="calculation.mrr" />
+            <span>{Number(data?.mrr)?.toFixed(0)} %</span>
+          </Flex>
+          <Flex p={2} justifyContent={"space-between"}>
+            <Trans i18nKey="calculation.clientConcentration" />
+            <span>{Number(data?.clientConcentration)?.toFixed(0)} %</span>
+          </Flex>
+          <Flex p={2} justifyContent={"space-between"}>
+            <Trans i18nKey="calculation.valuation" />
+            <span>{currencyFormat(data?.valuation ?? 0, true)}</span>
+          </Flex>
+        </Box>
       </Flex>
     </Box>
   );

@@ -8,7 +8,7 @@
   "typeOfItService": "Type of it service",
   "numberOfEmployees": "Number of employees",
   "revenueInputs": "Revenue inputs",
-  "monthlyRevenue": "Monthly Revenue (last 12 months)",
+  "monthlyRevenue": "Annual Revenue",
   "monthlyRevenueHelperText": "Raw revenue numbers (last 12 months)",
   "mrrHelperText": "Total recurring monthly contracts",
   "mrr": "MRR (Monthly Recurring Revenue)",

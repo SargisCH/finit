@@ -78,6 +78,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             helperText={t("developerSalariesHelperText")}
             control={control}
             placeholder={t("developerSalaries")}
+            int
           />
           <CurrencyInput
             name="top2Salaries"
@@ -85,6 +86,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             label={t("topSalaries")}
             control={control}
             placeholder={t("topSalaries")}
+            int
           />
         </Flex>
         <Flex gap={6} justifyContent={"start"}>
@@ -95,6 +97,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             helperText={t("contractorPaymentsHelperText")}
             control={control}
             placeholder={t("contractorPayments")}
+            int
           />
           <CurrencyInput
             name="softwareLicenses"
@@ -103,6 +106,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             helperText={t("softwareLicensesHelperText")}
             control={control}
             placeholder={t("softwareLicenses")}
+            int
           />
         </Flex>
         <Flex gap={6} justifyContent={"start"}>
@@ -113,6 +117,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             helperText={t("projectSpecificCostsHelperText")}
             control={control}
             placeholder={t("projectSpecificCosts")}
+            int
           />
         </Flex>
       </Flex>

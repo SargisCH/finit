@@ -122,6 +122,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             label={t("officeRent")}
             control={control}
             placeholder={t("officeRent")}
+            int
           />
           <CurrencyInput
             name="utilities"
@@ -129,6 +130,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             label={t("utilities")}
             control={control}
             placeholder={t("utilities")}
+            int
           />
         </Flex>
         <Flex gap={6} justifyContent={"start"}>
@@ -139,6 +141,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             helperText={t("adminSalariesHelperText")}
             control={control}
             placeholder={t("adminSalaries")}
+            int
           />
           <CurrencyInput
             name="marketing"
@@ -147,6 +150,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             helperText={t("marketingHelperText")}
             control={control}
             placeholder={t("marketing")}
+            int
           />
         </Flex>
         <Flex gap={6} justifyContent={"start"}>
@@ -156,6 +160,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             label={t("otherOperatingExpenses")}
             control={control}
             placeholder={t("otherOperatingExpenses")}
+            int
           />
           <Field.Root invalid={!!errors.fteRiskLevel} mt={2}>
             <Field.Label>

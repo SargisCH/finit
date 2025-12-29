@@ -77,6 +77,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             helperText={t("monthlyRevenueHelperText")}
             control={control}
             placeholder={t("monthlyRevenue")}
+            int
           />
           <CurrencyInput
             name="mrr"
@@ -85,6 +86,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             helperText={t("mrrHelperText")}
             control={control}
             placeholder={t("mrr")}
+            int
           />
         </Flex>
         <Flex gap={6} justifyContent={"start"}>
@@ -126,6 +128,7 @@ export default function RevenueDetails({ onSubmitHandler }: Props) {
             helperText={t("revenuePerClientHelperText")}
             control={control}
             placeholder={t("revenuePerClient")}
+            int
           />
         </Flex>
       </Flex>

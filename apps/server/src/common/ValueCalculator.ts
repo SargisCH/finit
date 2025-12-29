@@ -33,6 +33,7 @@ export default class ValueCalculator {
     } else if (level === FteLevels.MEDIUM) {
       return 0;
     }
+    return 0.3;
   }
   private getRFteCorrection(level: FteLevels | undefined): number | undefined {
     if (!level) return;

@@ -11,7 +11,7 @@ tar -czvf dist.tar.gz dist
 tar -czvf server_modules.tar.gz node_modules
 scp -i ~/.ssh/id_ed25519_personal -r  dist.tar.gz root@185-47-174-99.cloud-xip.com:~/finit-backend
 scp  -i ~/.ssh/id_ed25519_personal -r  server_modules.tar.gz root@185-47-174-99.cloud-xip.com:~/finit-backend
-cd ../../
+cd ../
 scp  -i ~/.ssh/id_ed25519_personal -r  apps/client/client-dist.tar.gz root@185-47-174-99.cloud-xip.com:~/finit-frontend
 curl http://185-47-174-99.cloud-xip.com:8090/deploy/finit-backend
 curl http://185-47-174-99.cloud-xip.com:8090/deploy/finit-frontend
