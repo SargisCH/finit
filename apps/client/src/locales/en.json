@@ -66,5 +66,40 @@
   "fteMediumDescription": "The top 3 employees generate 40–50% of revenue. There are 1–2 senior employees who are indispensable to clients.",
   "fteHighDescription": "One senior brings in 30-50% of revenue. The client works with them specifically. Their departure = loss of a client",
   "en": "Eng",
-  "am": "Հայ"
+  "am": "Հայ",
+  "startValuation": "Start Company Valuation",
+  "importFromExcel": "Import from Excel",
+  "import": {
+    "title": "Import Data",
+    "uploadStep": "Upload File",
+    "mappingStep": "Field Mapping",
+    "selectFile": "Select Excel/CSV File",
+    "dragAndDrop": "or drag and drop here",
+    "mappingDescription": "Map your file columns to the required fields",
+    "fieldName": "Field Name",
+    "fileHeader": "File Header",
+    "skip": "Skip",
+    "saveMapping": "Save Mapping",
+    "submit": "Submit",
+    "analyze": "Analyze Expenses",
+    "analyzing": "Analyzing...",
+    "readyToAnalyze": "Ready to Analyze",
+    "reviewBeforeSubmit": "Please review your settings before sending to AI analysis.",
+    "fileDetails": "File Details",
+    "fieldMappings": "Field Mappings",
+    "systemField": "System Field",
+    "fileColumn": "File Column",
+    "noMappingAutoDetect": "No fields mapped — AI will auto-detect columns",
+    "analysisResult": "Expense Analysis",
+    "totalExpenses": "Total expenses",
+    "done": "Done",
+    "startValuation": "Start Company Valuation",
+    "fields": {
+      "name": "Name",
+      "data": "Data",
+      "taxid": "Tax ID",
+      "tax": "Tax",
+      "price": "Price"
+    }
+  }
 }

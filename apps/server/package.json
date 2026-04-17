@@ -23,6 +23,7 @@
     "typeorm:migration:run": "npm run typeorm -- migration:run -d src/data-source.ts"
   },
   "dependencies": {
+    "@google/genai": "^1.50.1",
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
@@ -30,11 +31,13 @@
     "@shared/schemas": "workspace:*",
     "@shared/types": "workspace:*",
     "big.js": "^7.0.1",
+    "csv-parser": "^3.2.0",
     "dotenv": "^17.2.3",
     "pg": "^8.16.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.27",
+    "xlsx": "^0.18.5",
     "zod": "^4.1.13"
   },
   "devDependencies": {
@@ -46,6 +49,7 @@
     "@types/big.js": "^6.2.2",
     "@types/express": "^5.0.0",
     "@types/jest": "^30.0.0",
+    "@types/multer": "^2.1.0",
     "@types/node": "^22.10.7",
     "@types/supertest": "^6.0.2",
     "eslint": "^9.18.0",

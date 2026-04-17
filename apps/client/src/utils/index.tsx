@@ -1,4 +1,4 @@
-export const currencyFormat = (amount: number | string, isInt = false) => {
+export const currencyFormat = (amount: number | string) => {
   const formatted = new Intl.NumberFormat("am-HY", {
     style: "currency",
     currency: "AMD",

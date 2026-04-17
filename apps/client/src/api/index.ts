@@ -25,12 +25,12 @@ export const post = async <T extends Object, R extends Object>(
     body: JSON.stringify(body),
   }).then(responseHandler);
 };
-export const put = async <T extends Object>(endpoint: string, body: T) => {
+export const postFile = async <R extends Object>(
+  endpoint: string,
+  formData: FormData,
+): Promise<R> => {
   return fetch(`${baseUrl}/${endpoint}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
+    method: "POST",
+    body: formData,
   }).then(responseHandler);
 };

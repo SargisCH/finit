@@ -5,11 +5,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { configService } from '../configuration';
 import { CompanyEvaluationModule } from './companyEvaluation/companyEvaluation.module';
 import { CompanyEvaluationWipModule } from './companyEvaluationWip/companyEvaluationWip.module';
+import { ImportModule } from './import/import.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
     CompanyEvaluationModule,
     CompanyEvaluationWipModule,
+    ImportModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,14 +1,6 @@
-import {
-  Field,
-  Flex,
-  Input,
-  InputGroup,
-  NumberInput,
-  Span,
-} from "@chakra-ui/react";
+import { Field, Input, InputGroup } from "@chakra-ui/react";
 import { Controller } from "react-hook-form";
 import { Trans } from "react-i18next";
-import { currencyFormat } from "../../utils";
 import { ChangeEvent, useState } from "react";
 
 type Props = {
@@ -24,10 +16,6 @@ type Props = {
   size?: string;
 };
 
-const FORMAT_OPTIONS: Intl.NumberFormatOptions = {
-  style: "currency",
-  currency: "AMD",
-};
 // const parseCurrency = (val: string) => {
 //   return val.replace(/[^0-9.-]/g, "");
 // };
@@ -104,8 +92,6 @@ const FORMAT_OPTIONS: Intl.NumberFormatOptions = {
 
 const CurrencyInput = ({
   isDisabled,
-  isInvalid,
-  size = "md",
   label,
   control,
   placeholder,
@@ -115,12 +101,6 @@ const CurrencyInput = ({
   int,
 }: Props) => {
   const [isFocused, setIsFocused] = useState(false);
-
-  const sizeClasses: { [key: string]: string } = {
-    sm: "text-sm h-8",
-    md: "text-base h-10",
-    lg: "text-lg h-12",
-  };
 
   // Format number with commas and proper decimal places
   const formatCurrency = (num: string) => {

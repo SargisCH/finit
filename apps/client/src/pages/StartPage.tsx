@@ -3,9 +3,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { startValuation } from "../api/valuation";
+import { useTranslation } from "react-i18next";
 
 const StartPage: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleStartValuation = () => {
     mutate();
@@ -53,7 +55,15 @@ const StartPage: React.FC = () => {
           onClick={handleStartValuation}
           loading={isPending}
         >
-          Start Company Valuation
+          {t("startValuation")}
+        </Button>
+        <Button
+          variant="outline"
+          colorPalette="natureDark"
+          size="lg"
+          onClick={() => navigate("/import-wizard/upload")}
+        >
+          {t("importFromExcel")}
         </Button>
       </VStack>
     </Box>
