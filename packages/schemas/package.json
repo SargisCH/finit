@@ -9,8 +9,9 @@
     "build": "tsup"
   },
   "dependencies": {
-    "zod": "^4.1.13",
-    "@shared/types": "workspace:*"
+    "@shared/types": "workspace:*",
+    "build": "^0.1.4",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@types/node": "^22.10.7",
